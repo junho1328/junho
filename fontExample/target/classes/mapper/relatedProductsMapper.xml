@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="relatedProductsMapper">
+	<select id="findRelatedProducts" resultType="RelatedProducts">
+		<![CDATA[
+			select no, image from product where sno=(select sno from product where no=#{no}) and rownum<=3
+	    ]]>
+    </select>
+</mapper>

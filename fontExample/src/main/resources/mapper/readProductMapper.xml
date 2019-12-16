@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="readProductMapper">
+	<select id="readProductTop" resultType="readProduct">
+			select product.no no, product.image image, product.name, product.price, product.quantity, sell.area, product.product_date,
+			sell.image img, sell.infomation, seller.image sellerimage, seller.name sellername, seller.username, member.trust, seller.count
+			from product, sell, seller, member
+			where product.no=sell.product_no and member.username=seller.username and sell.username=member.username and product.no=#{no}
+	</select>
+	<select id="readProductInquiry" resultType="productInquiry">
+		select product.no pno, product_inquiry.product_no pino, sell.product_no sno, product_inquiry.username, product_inquiry.question, product_inquiry.answer, product_inquiry.no ino
+		from product, product_inquiry, sell
+		where product.no=product_inquiry.product_no and sell.product_no=product.no and product.no=#{no} order by ino desc;
+	</select>
+	
+	<select id="inquiryByPage" resultType="productInquiry">
+		<![CDATA[ 
+		select * from
+		(
+		select rownum as rnum, P.* from
+		(select /*+ index_desc(product_inquiry pk_product_inquiry)*/ no, product_no, username, question, answer, iquiry_date from product_inquiry where product_no=#{no}) P
+		where rownum <=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	
+	<select id="findCount" resultType="int">
+		select /*+ index_ffs(product_inquiry pk_product_inquiry) */ count(no) from product_inquiry where product_no=#{no}
+	</select>
+	
+	<insert id="insertInQuestion" useGeneratedKeys="true" keyProperty="no">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select product_inquiry_seq.nextval from dual
+		</selectKey>
+		insert into product_inquiry(no, product_no, username, question, answer, iquiry_date)
+		values(#{no}, #{product_no}, #{username}, #{question}, #{answer}, sysdate)
+	</insert>
+	<update id="insertInAnswer">
+		update product_inquiry set answer=#{answer} where no=#{no}
+	</update>
+	
+	<select id="readSeller" resultType="readProduct">
+		select product.no pno, sell.no sno, seller.username, seller.image, seller.name, member.trust, seller.count
+		from product, sell, seller, member
+		where product.no = sell.product_no and seller.username = member.username and sell.username=member.username and product.no = #{no}
+	</select>
+	
+	<!--
+	<select id="readProductTag" resultType="readProduct">
+		select regexp_replace(listagg(name,',') within group (order by name), '([^,]+)(,\1)*(,|$)', '\1\3') as name from tag,
+		(select product.no no, tag.product_no tno from product, tag where product.no=tag.product_no and product.no=#{no}) b where tag.product_no=b.no
+	</select>
+	-->
+</mapper>

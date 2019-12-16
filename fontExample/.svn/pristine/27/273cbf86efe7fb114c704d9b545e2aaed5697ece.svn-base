@@ -1,0 +1,215 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#service_center_service_1vs1").on("click", function(){
+			location.href="/fontExample/inquiry_write";
+		})
+		$("#service_center_frequently").click(function() {
+			if ($("#frequentlyList").is(":visible")) {
+				$("#frequentlyList").slideUp();
+			} else {
+				$("#frequentlyList").slideDown();
+			}
+		});
+
+		$("#frequently1").click(function() {
+			if ($("#frequentlyList1").is(":visible")) {
+				$("#frequentlyList1").slideUp();
+			} else {
+				$("#frequentlyList1").slideDown();
+			}
+		});
+		$("#frequently2").click(function() {
+			if ($("#frequentlyList2").is(":visible")) {
+				$("#frequentlyList2").slideUp();
+			} else {
+				$("#frequentlyList2").slideDown();
+			}
+		});
+		$("#frequently3").click(function() {
+			if ($("#frequentlyList3").is(":visible")) {
+				$("#frequentlyList3").slideUp();
+			} else {
+				$("#frequentlyList3").slideDown();
+			}
+		});
+		$("#frequently4").click(function() {
+			if ($("#frequentlyList4").is(":visible")) {
+				$("#frequentlyList4").slideUp();
+			} else {
+				$("#frequentlyList4").slideDown();
+			}
+		});
+	});
+</script>
+<style>
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+
+#service_center_menu {
+	float: left;
+	width: 80%;
+	text-align: center;
+	height: 130px;
+	padding-top: 5px;
+	background-color: rgba(220, 47, 47, 0.14);
+	border-width: 0px 0px 1px;
+	border-style: solid;
+	border-color: rgba(51, 51, 51, 0.29);
+}
+
+#service_center_h2 {
+	display: inline-block;
+}
+
+#service_center_search {
+	display: inline-block;
+}
+
+#service_center_search_input {
+	margin-left: 20px;
+	float: left;
+	display: block;
+	width: 250px;
+	height: 28px;
+}
+
+#service_center_service_1vs1 {
+	margin-left: 50px;
+	width: 200px;
+	height: 28px;
+	display: inline-block;
+	text-align: center;
+	background-color: rgba(220, 80, 80, 0.25);
+}
+
+#service_center_subMenu {
+    width: 60%;
+    display: contents;
+}
+.service_center_mainBtn{
+	width: 960px;
+	height: 60px;
+	background-color: rgba(224, 224, 224, 0.39);
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgba(51, 51, 51, 0.14);
+	text-align: center;
+	margin-right: -3px;
+}
+.service_center_subButton{
+	width: 960px;
+	height: 80px;
+	background-color: white;
+}
+.questionName{
+	margin-top: 8px;
+	margin-left: 6px;
+	float: left;
+	font-size: 18px;
+}
+#frequentlyList {
+	width: 100%;
+}
+
+#frequently_page {
+    display: flow-root;
+	margin-bottom: 100px;
+}
+
+#question_mark {
+	float: left;
+}
+
+#downarrow {
+	float: right;
+	margin-top: 5px;
+	margin-right: 20px;
+}
+
+</style>
+</head>
+<body>
+	<div>
+		<div>
+			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
+		</div>
+		<div id="service_center_menu">
+			<br>
+			<h2 id="service_center_h2">
+				<b>고객센터</b>
+			</h2>
+			<button id="service_center_service_1vs1">1:1 문의하기</button>
+		</div>
+		<div id="service_center_subMenu">
+			<button id="service_center_frequently" class="service_center_mainBtn">
+				<div>
+					<label id="questionName4" class="questionName">자주 묻는 질문 </label>
+				</div>
+			</button>
+
+			<ul id="frequentlyList" class="example01" style="display: none;">
+				<li>
+					<div id="frequently_page">
+						<button id="frequently1" class="service_center_subButton">
+							<div>
+								<img id="question_mark" src="resources/question_mark.png"">
+								<label id="questionName1" class="questionName">4982는 무슨 사이트 인가요? </label> <img
+									id="downarrow" src="resources/downarrow.png">
+							</div>
+						</button>
+						<ul id="frequentlyList1" class="example01" style="display: none;">
+							<li>내용</li>
+						</ul>
+						<button id="frequently2" class="service_center_subButton">
+							<div>
+								<img id="question_mark" src="resources/question_mark.png"">
+								<label id="questionName2" class="questionName">또 뭐가 궁금하지? </label> <img
+									id="downarrow" src="resources/downarrow.png">
+							</div>
+						</button>
+						<ul id="frequentlyList2" class="example01" style="display: none;">
+							<li>내용</li>
+						</ul>
+						<button id="frequently3" class="service_center_subButton">
+							<div>
+								<img id="question_mark" src="resources/question_mark.png"">
+								<label id="questionName3" class="questionName">으아아아김찬주 </label> <img id="downarrow"
+									src="resources/downarrow.png">
+							</div>
+						</button>
+						<ul id="frequentlyList3" class="example01" style="display: none;">
+							<li>내용</li>
+						</ul>
+						<button id="frequently4" class="service_center_subButton">
+							<div>
+								<img id="question_mark" src="resources/question_mark.png"">
+								<label id="questionName4" class="questionName">쓰으으읍정종혁 </label> <img id="downarrow"
+									src="resources/downarrow.png">
+							</div>
+						</button>
+						<ul id="frequentlyList4" class="example01" style="display: none;">
+							<li>내용</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

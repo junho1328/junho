@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<table class="table table-striped">
+		<thead>
+			<tr><th colspan="5">오늘의 현황 2019.11.06</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>매출</td><td>결제건수</td><td>회원가입</td><td>방문자</td><td>문의</td></tr>
+			<tr><td>300000원</td><td>300건</td><td>200명</td><td>500명</td><td>21건</td></tr>
+		</tbody>
+		<thead>
+			<tr><th colspan="5">이달의 현황</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>매출</td><td>결제건수</td><td>회원가입</td><td>방문자</td><td>문의</td></tr>
+			<tr><td>300000원</td><td>300건</td><td>200명</td><td>500명</td><td>21건</td></tr>
+		</tbody>
+	</table>
+</body>
+</html>

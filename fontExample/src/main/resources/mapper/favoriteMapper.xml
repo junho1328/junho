@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="favoriteMapper">
+	<select id="findFavorite" resultType="int">
+		select product_no from favorite where username=#{username}
+	</select>
+	<select id="findProductByFavorite" resultType="favorite">
+		select f.no no ,p.no pno ,p.image, p.name, p.price, p.product_date productDate, p.state 
+		from product p,favorite f
+		where p.no=#{productNo} and f.username=#{username} and p.no=f.product_no
+	</select>
+	<select id="findFavoriteByPNo" resultType="long">
+		select count(product_no) from favorite
+		where product_no=#{productNo} and username=#{username}
+	</select>
+	<select id="favoriteCount" resultType="int">
+		select count(*) from favorite
+		where username=#{username}
+	</select>
+	<insert id="insertFavorite">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select favorite_seq.nextval from dual <!--  하나씩 올라 가는 값 -->
+		</selectKey>
+		insert into favorite (no,username,product_no)
+		values (#{no},#{username},#{productNo})
+	</insert>
+	<select id="findProductBySoldOut" resultType="int">
+		select state from product 
+		where no=#{isSO}
+	</select>
+	<delete id="deleteFavorite">
+		delete from favorite
+		where no=#{no}
+	</delete>
+</mapper>

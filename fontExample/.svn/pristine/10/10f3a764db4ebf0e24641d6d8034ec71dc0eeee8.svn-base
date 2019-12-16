@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+<style>
+	.inline{
+		display: inline-block;
+	}
+	.button{
+		font-size: 15px;
+		width: 100px;
+		height: 40px;
+		background: gray;
+		margin: 10px;
+		border-radius: 5px;
+		background-color: rgb(255, 182, 193);
+		font-weight: bold;
+		color: white;
+		border: none;
+	}
+	.radio{
+		font-size: 15px;
+	}
+	#anothertext{
+		font-size: 15px;
+	}
+	tr{
+		height: 130px;
+		text-align: center;
+	}
+	th{
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<div style="text-align: left">
+		<div style="text-align: left; padding-left:10%" class="inline">
+			판매글 <button class="button">전체 숨기기</button> <button class="button">전체 삭제</button> 	
+		</div>
+		<div class="inline" style="padding-left: 35%">
+		</div>
+		<div class="inline">
+			<input type="radio"  name="size" value="small" id="anothertext">작은 아이콘<input type="radio"  name="size" value="big" id="anothertext">큰아이콘 
+		</div>
+	</div>
+	<table style="width: 100%; ">
+		<colgroup>
+			<col width="5%" />
+			<col width="5%" />
+			<col width="10%" />
+			<col width="30%" />
+			<col width="20%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+		</colgroup>
+		<tr style="border-bottom: 1px solid; border-top: 1px solid; height: 50px ;"><th><input type="checkbox" value="selectAll"></th><th>NO</th><th>사진</th><th>제품명</th><th>가격</th><th>등록일</th><th>숨기기</th><th>삭제</th></tr>
+		<tr><td><input type="checkbox" name="1" value="select"></td><td>NO</td><td><img src="resources/picture.jpg" width="100px" height="100px"></td><td>제품</td><td>가격</td><td>등록일</td><td><button id="hide"class="button">숨기기</button></td><td><button id="delete"class="button">삭제</button></td></tr>
+		<tr><td><input type="checkbox" name="2" value="select"></td><td>NO</td><td><img src="resources/picture.jpg" width="100px" height="100px"></td><td>제품</td><td>가격</td><td>등록일</td><td><button id="hide"class="button">숨기기</button></td><td><button id="delete"class="button">삭제</button></td></tr>
+		<tr><td><input type="checkbox" name="3" value="select"></td><td>NO</td><td><img src="resources/picture.jpg" width="100px" height="100px"></td><td>제품</td><td>가격</td><td>등록일</td><td><button id="hide"class="button">숨기기</button></td><td><button id="delete"class="button">삭제</button></td></tr>
+		<tr><td><input type="checkbox" name="4" value="select"></td><td>NO</td><td><img src="resources/picture.jpg" width="100px" height="100px"></td><td>제품</td><td>가격</td><td>등록일</td><td><button id="hide"class="button">숨기기</button></td><td><button id="delete"class="button">삭제</button></td></tr>
+	</table>
+	
+</body>
+</html>

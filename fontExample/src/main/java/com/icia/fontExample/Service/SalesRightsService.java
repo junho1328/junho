@@ -1,0 +1,54 @@
+package com.icia.fontExample.Service;
+
+import java.io.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.multipart.*;
+
+import com.icia.fontExample.Dao.*;
+import com.icia.fontExample.entity.*;
+
+@Service
+public class SalesRightsService {
+	@Autowired
+	private SalesRightsDao dao;
+	public boolean checkName(String name) {
+		return dao.checkName(name)==null;
+	}
+
+	public boolean checkSns(String sns) {
+		return dao.checkSns(sns)==null; 
+	}
+	public boolean checkAccount(String account) {
+		return dao.checkAccount(account)==null;
+	}
+	@Autowired
+	private AuthorityDao authorityDao;
+	@Value("#{config['upload.storeSajin.folder']}")
+	private String PROFILE_FOLDER;
+	@Value("#{config['download.storeSajin.uri']}")
+	private String PROFILE_URI;
+	public int insert(Seller seller , MultipartFile storeSajin) throws IllegalStateException, IOException {
+		authorityDao.insert(seller.getUsername(),"ROLE_SELLER");
+		if(storeSajin != null) {
+			// 업로드한 파일의 contentType이 image인지 확인
+			if(storeSajin.getContentType().toLowerCase().startsWith("image/")) {
+				// 프사의 파일명은 사용자 아이디와 같지만 이미지의 확장자는 여러종류가 있다
+				// 즉 아이디가 joonyoung일 경우는 프사는 joonyoung.jpg일 수도 joonyoung.png 일 수도 있다
+				// 확장자를 잘라내자
+				// 1. 파일이름에서 마지막 . 의 위치를 찾는다
+				int lastIndexOfDot = storeSajin.getOriginalFilename().lastIndexOf('.');
+				// 2. 파일 이름에서 마지막 . 뒷 부분을 잘라낸다
+				String extension = storeSajin.getOriginalFilename().substring(lastIndexOfDot);
+				// 3. 아이디 뒤에 잘라낸 확장자를 붙인다
+				String imageName = seller.getUsername() + extension;
+				File file = new File( PROFILE_FOLDER, imageName);
+				storeSajin.transferTo(file);
+				String fileUrl = PROFILE_URI + imageName;
+				seller.setImage(fileUrl);
+			}
+		}
+		return dao.insert(seller);
+	}
+}

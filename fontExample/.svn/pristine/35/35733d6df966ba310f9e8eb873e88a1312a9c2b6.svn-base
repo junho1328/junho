@@ -1,0 +1,32 @@
+package com.icia.fontExample.Service;
+
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.Dao.*;
+import com.icia.fontExample.entity.*;
+
+@Service
+public class ProductService {
+
+	@Autowired
+	private ProductDao dao;
+	
+	public int insert(Product product) {
+		return dao.insert(product);
+	}
+
+	public List<Product> findAllProduct() {
+		return dao.findAllProduct();
+	}
+
+	public List<Product> findProduct(long no) {
+		return dao.findProduct(no);
+	}
+
+	public void delete(long no) {
+		dao.delete(no);
+	}
+}

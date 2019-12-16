@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pointMapper">
+	<update id="increasePoint">
+		update member set point=point+#{point} where username=#{username} 
+	</update>
+	<update id="decreasePoint">
+		update member set point=point-#{point} where username=#{username}
+	</update>
+	<select id="findPointByUsername" resultType="long">
+		select point from member where username=#{username}
+	</select>
+</mapper>

@@ -1,0 +1,66 @@
+package com.icia.fontExample.Dao;
+
+import java.util.*;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+
+import com.icia.fontExample.entity.*;
+
+public class MemberDao {
+	@Autowired
+	SqlSessionTemplate tpl;
+
+	public String findIdById(String username) {
+		return tpl.selectOne("userMapper.findIdById", username);
+	}
+
+	public int insert(Member member) {
+		return tpl.insert("userMapper.insert", member);
+	}
+
+	public String findIdByEmail(String email) {
+		return tpl.selectOne("userMapper.findByEmail", email);
+	}
+
+	public String findPasswordByIdAndEmail(String username, String email) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("username", username);
+		map.put("email", email);
+		return tpl.selectOne("userMapper.findPasswordByIdAndEmail", map);
+	}
+
+	public String findPasswordById(String username) {
+		return tpl.selectOne("userMapper.findPasswordById", username);
+	}
+
+	public int updatePassword(String username, String password) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("username", username);
+		map.put("password", password);
+		return tpl.update("userMapper.updatePassword", map);
+	}
+
+	public int update(Member member) {
+		return tpl.update("userMapper.update", member);
+	}
+
+	public Member findById(String username) {
+		return tpl.selectOne("userMapper.update", username);
+	}
+
+	public Member findMe(String username) {
+		return tpl.selectOne("userMapper.findMe", username);
+	}
+
+	public int updateExt(String ext, String username) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("username", username);
+		map.put("password", ext);
+		return tpl.update("userMapper.updateExt", map);
+	}
+
+	public int delete(String username) {
+		return tpl.delete("userMapper.delete", username);
+	}
+}

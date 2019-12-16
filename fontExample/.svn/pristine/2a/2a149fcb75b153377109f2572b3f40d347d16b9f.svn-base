@@ -1,0 +1,32 @@
+package com.icia.fontExample.Dao;
+
+import java.util.*;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.entity.*;
+
+@Repository
+public class exchangeDao {
+
+	@Autowired
+	private SqlSessionTemplate tpl;
+	public int insert(Exchange exchange) {
+		return tpl.insert("exchangeMapper.insert");
+	}
+
+	public List<Exchange> findAll() {
+		return tpl.selectOne("exchangeMapper.findAll");
+	}
+
+	public List<Exchange> findByUsername(String username) {
+		return tpl.selectOne("exchangeMapper.findAll",username);
+	}
+
+	public int delete(long no) {
+		return tpl.delete("exchangeMapper.delete",no);
+	}
+
+}

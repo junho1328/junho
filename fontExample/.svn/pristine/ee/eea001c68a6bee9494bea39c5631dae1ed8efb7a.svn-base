@@ -1,0 +1,13 @@
+package com.icia.fontExample.entity;
+
+import lombok.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class WithdrawalEntity {
+	private String reason;
+	private String reason_detail;
+	private long retire_count;
+}

@@ -1,0 +1,45 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<style>
+	*{
+		margin : 0 auto;
+		padding : 0;
+	}
+	div{
+		border : 1px solid black;
+	}
+	.center{
+		text-align : center;
+	}
+	#sellerinfo{
+		border : 2px solid #FFB6C1;
+		text-align : center;
+	}
+</style>
+<body>
+	구매완료<br>
+	<div class="center">
+		구매가 완료되었습니다.<br>
+	다음과 같은 방법으로 판매자와 연락할 수 있습니다.
+	</div>
+	<div id="sellerinfo">
+		판매자 정보
+		<div>
+		스토어명<br>
+		연락처<br>
+		SNS
+		</div>
+		<button class="btn btn">구매목록으로</button>
+	</div>
+	
+</body>
+</html>

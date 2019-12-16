@@ -1,0 +1,22 @@
+package com.icia.fontExample.Dao;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+@Repository // 읽어들일 때 Component == ( Controller Repository Service ) 다 범용 
+public class WithdrawalDao {
+	@Autowired // 같은거 
+	private SqlSessionTemplate tpl;
+	
+	public int delete(String username) {
+		return tpl.delete("withdrawalMapper.delete",username);
+	}
+	public int update(String retire_reason) {
+		return tpl.update("withdrawalMapper.update",retire_reason);
+	}
+	public int insert(String reason_detail) {
+		return tpl.insert("withdrawalMapper.insert",reason_detail);
+	}
+
+}

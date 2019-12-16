@@ -1,0 +1,30 @@
+package com.icia.fontExample.Dao;
+
+import java.util.*;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.entity.*;
+
+@Repository
+public class ProductDao {
+
+	@Autowired
+	private SqlSessionTemplate tpl;
+	public int insert(Product product) {
+		return tpl.insert("productMapper.insert",product);
+	}
+	
+	public List<Product> findAllProduct() {
+		return tpl.selectOne("productMapper.findAllProduct");
+	}
+
+	public List<Product> findProduct(long no) {
+		return tpl.selectOne("productMapper.findProduct",no);
+	}
+	public int delete(long no) {
+		return tpl.delete("productMapper.delete", no);
+	}
+}

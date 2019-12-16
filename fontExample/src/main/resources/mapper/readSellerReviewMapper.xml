@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="readSellerReviewMapper">
+	<select id="findCount" resultType="int" parameterType="string">
+		select /*+ index_ffs(seller_review seller_review_pk_no) */ count(no) from seller_review where seller=#{seller}
+	</select>
+	
+	<select id="findEachSeller" resultType="SellerReview">
+		<![CDATA[
+			select * from
+		       	(select rownum as rnum, b.* from 
+		       		(select no, username writer, seller, image picture, product, content, trust, seller_review_date sellerReviewDate from seller_review where seller=#{seller} order by no asc) b
+		       	where rownum<=#{endRowNum}) 
+		    where rnum>=#{startRowNum}
+		]]>
+	</select>
+</mapper>

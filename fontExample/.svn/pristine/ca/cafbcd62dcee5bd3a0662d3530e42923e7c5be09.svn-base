@@ -1,0 +1,39 @@
+package com.icia.fontExample.Service;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.Dao.*;
+import com.icia.fontExample.entity.*;
+
+@Service
+public class PurchaseService {
+	@Autowired
+	private WaitingPointDao waitingPointDao;
+	@Autowired
+	private PurchaseDao purchaseDao;
+	
+	public int insertPurchase(String username, long no) {
+		Purchase purchase = new Purchase();
+		purchase.setProduct_no(no);
+		purchase.setUsername(username);
+		purchase.setMethod(1);
+		purchase.setState(1);
+		return purchaseDao.insert(purchase);
+	}
+	public long findPurchaseNo(String username, long no) {
+		Purchase purchase = new Purchase();
+		purchase.setProduct_no(no);
+		purchase.setUsername(username);
+		return purchaseDao.findPurchaseNo(purchase);
+	}
+	public int waitingPoint(String name, long no, long point, String sellerUsername) {
+		WaitingPoint waitingPoint = new WaitingPoint();
+		waitingPoint.setNo(no);
+		waitingPoint.setBuyUsername(name);
+		waitingPoint.setSellUsername(sellerUsername);
+		waitingPoint.setPoint(point);
+		return waitingPointDao.insert(waitingPoint);
+	}
+	
+}

@@ -1,0 +1,47 @@
+package com.icia.fontExample.Controller;
+
+import java.io.*;
+import java.lang.reflect.*;
+import java.security.*;
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.security.access.annotation.*;
+import org.springframework.web.bind.annotation.*;
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.icia.fontExample.Service.*;
+
+@Secured("ROLE_MEMBER")
+@RequestMapping("/api")
+@RestController
+public class FavoriteController {
+	@Autowired
+	private FavoriteService service;
+	@Autowired
+	private ObjectMapper objectMapper;
+	
+	@PostMapping("/favorite")
+	public ResponseEntity<?> insertFavorite(String username,long productNo){
+		return ResponseEntity.ok(service.insert(username, productNo));
+	}
+	@GetMapping("/favorite")
+	public ResponseEntity<?> findFavorite(Principal principal){
+		return ResponseEntity.ok(service.findFavorite(principal.getName()));
+	}
+	@DeleteMapping("/favorite")
+	public ResponseEntity<?> delete(String json) throws JsonParseException, JsonMappingException, IOException{
+		//return ResponseEntity.ok(service.delete(no));
+		String str = json.replaceAll("&quot;", "");
+		Integer[] arr = objectMapper.readValue(str, Integer[].class);
+		List<Integer> list = Arrays.asList(arr);
+		return ResponseEntity.ok(service.delete(list));
+	}
+	@DeleteMapping("/favorite/soldout")
+	public ResponseEntity<?> deleteBySoldout(Principal principal){
+		//return ResponseEntity.ok(service.delete(no));
+		return ResponseEntity.ok(service.deleteBySoldout(principal.getName()));
+	}
+}

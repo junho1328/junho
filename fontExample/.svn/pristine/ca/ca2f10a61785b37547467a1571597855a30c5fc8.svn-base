@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productMapper">
+	<insert id="insert">
+		insert into product(no, category_no, name, price, image, quantity, state)
+		values(#{no},#{category_no},#{name},#{price},#{image},#{quantity},#{state})
+	</insert>
+	<select id="findAllProduct" resultType="product">
+		select no, category_no, name, price, image, quantity, state from product
+	</select>
+	<select id="findProduct" resultType="product">
+		select no, category_no, name, price, image, quantity, state from product
+		where no=#{no}
+	</select>
+	<delete id="delete">
+		delete from no where no=#{no}
+	</delete> 
+</mapper>

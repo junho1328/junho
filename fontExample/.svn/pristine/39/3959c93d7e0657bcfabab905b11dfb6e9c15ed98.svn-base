@@ -1,0 +1,25 @@
+package com.icia.fontExample.Controller;
+
+import javax.servlet.http.*;
+
+import org.apache.ibatis.annotations.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.security.core.*;
+import org.springframework.security.web.authentication.logout.*;
+import org.springframework.web.bind.annotation.*;
+
+import com.icia.fontExample.Service.*;
+
+import lombok.*;
+
+@RestController
+public class WithdrawalController {
+	@Autowired
+	private WithdrawalService service;
+	
+	@DeleteMapping("/withdrawal")
+	public ResponseEntity<?> withdrawal(String username,String reason,String reason_detail){
+		return ResponseEntity.ok(service.withdrawal(username, reason, reason_detail));
+	}
+}

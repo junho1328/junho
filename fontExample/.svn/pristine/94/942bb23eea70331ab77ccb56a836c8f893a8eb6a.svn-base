@@ -1,0 +1,5 @@
+package com.icia.fontExample.date.dto;
+
+public class InquiryPage {
+
+}

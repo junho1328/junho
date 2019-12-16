@@ -1,0 +1,17 @@
+ package com.icia.fontExample.entity;
+
+import lombok.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Product {
+	public long no;
+	public long category_no;
+	public String name;
+	public long price;
+	public String image;
+	public long quantity;
+	public long state;
+}

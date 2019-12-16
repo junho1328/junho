@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="withdrawalMapper">
+<!-- id는 Dao에서 불러올 때 아이디 -->
+	<delete id="delete" >
+	<!-- 
+		select 검색 내용 from 테이블명 where 
+		insert into 테이블 행 values 값
+		update 테이블 set 변경할 내용 where
+		delete from 테이블 where 
+	 -->
+		delete from member where username=#{username}
+	</delete>
+	<delete id="sellerdelete">
+		delete from seller where username=#{username}
+	</delete>
+	<delete id="authoritydelete">
+		delete from authorities where username=#{username}
+	</delete>
+	<!--  객관식 -->
+	<update id="withdrawalupdate">
+		update retire set count=count+1 where reason=#{reason}      
+	</update>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="no">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select retire_seq.nextval from dual <!--  하나씩 올라 가는 값 -->
+		</selectKey> 
+		insert into retire_detail(no,reason) 
+		values(#{no},#{reason_detail})
+	</insert>
+</mapper>

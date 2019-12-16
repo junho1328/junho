@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="loginJobMapper">
+	<!-- 01. 로그인 실패 횟수 증가 -->
+	<update id="increaseLoginFailureCount">
+		update member set login_failure_cnt = login_failure_cnt+1 where username = #{username} 	
+	</update>
+	
+	<!-- 02. 로그인 실패 횟수 읽어오기 --> 
+	<select id = "findLoginFailureCount" resultType = "string">
+		select login_failure_cnt from member where username=#{username} and rownum = 1
+	</select>
+	
+	<!-- 03. 로그인 10회 실패로 아이디 비활성화 -->
+	<update id = "block">
+		update member set enabled=0 where username = #{username}
+	</update>
+	
+	<!-- 03. 비밀번호 변경으로 아이디 활성화 -->
+	<update id = "unblock">
+		update member set enabled=1 where username = #{username}
+	</update>
+	
+	<!-- 04. 로그인 성고하면 로그인 실패 횟수 리셋 -->
+	<update id="resetLoginFailureCount">
+		update member set login_failure_cnt = 0 where username = #{username}
+	</update>
+</mapper>

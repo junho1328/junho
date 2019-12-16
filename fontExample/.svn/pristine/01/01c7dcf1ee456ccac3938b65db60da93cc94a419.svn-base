@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seller_reviewMapper">
+	<insert id="insert">
+		insert into seller_review(no, writer, seller, picture, product, content, trust)
+		values(#{no},#{writer},#{seller},#{picture},#{product},#{content},#{trust})
+	</insert>
+	<select id="findAllSeller_Review" resultType="seller_review">
+		select no, writer, seller, picture, product, content, trust from seller_review
+	</select>
+	<select id="findSeller_Review" resultType="seller_review">
+		select no, writer, seller, picture, product, content, trust from seller_review
+		where no=#{no}
+	</select>
+	<delete id="delete">
+		delete from no where no=#{no}
+	</delete> 
+</mapper>

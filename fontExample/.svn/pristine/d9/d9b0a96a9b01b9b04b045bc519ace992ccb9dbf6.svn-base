@@ -1,0 +1,31 @@
+package com.icia.fontExample.Service;
+
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.Dao.*;
+import com.icia.fontExample.entity.*;
+
+@Service
+public class InquiryService {
+
+	@Autowired
+	private InquiryDao dao;
+
+	public Long insert(Inquiry inquiry) {
+		dao.insert(inquiry);
+		return inquiry.getNo();
+	}
+	public Inquiry inquiryRead(Long no) {
+		return dao.inquiryRead(no);
+	}
+	
+	public List<Inquiry> findAll(){
+		return dao.findAll();
+	}
+	public int delete(long no) {
+		return dao.delete(no);
+	}
+}

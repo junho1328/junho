@@ -1,0 +1,33 @@
+package com.icia.fontExample.Service;
+
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.Dao.*;
+import com.icia.fontExample.entity.*;
+
+@Service
+public class exchangeService {
+	@Autowired
+	private exchangeDao dao;
+	
+	public int insert(Exchange exchange) {
+		dao.insert(exchange);
+		return 1;
+	}
+
+	public List<Exchange> findAll() {
+		return dao.findAll();
+	}
+
+	public List<Exchange> findByUsername(String username) {
+		return dao.findByUsername(username);
+	}
+
+	public void delete(long no) {
+		dao.delete(no);
+	}
+
+}

@@ -1,0 +1,36 @@
+package com.icia.fontExample.Controller;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+
+import com.icia.fontExample.Service.*;
+import com.icia.fontExample.entity.*;
+
+@RequestMapping("/api")
+@RestController
+public class InquiryController {
+
+	@Autowired
+	private InquiryService service;
+	
+	@PostMapping(path="/inquiryInsert",produces="application/json;charset=utf-8")
+	public ResponseEntity<?> inqurityInsert(Inquiry inquiry) {
+		return ResponseEntity.ok(service.insert(inquiry));
+	}
+	
+	@GetMapping("/inquiryRead")
+	public ResponseEntity<?> inquiryRead(@RequestParam Long no) {
+		return ResponseEntity.ok(service.inquiryRead(no));
+	}
+	
+	@GetMapping("/inquiry")
+	public ResponseEntity<?> findAll(){
+		return ResponseEntity.ok(service.findAll());
+	}
+	
+	@DeleteMapping("/inquiryDelete")
+	public ResponseEntity<?> delete(@RequestParam Long no){
+		return ResponseEntity.ok(service.delete(no));
+	}
+}

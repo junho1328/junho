@@ -1,0 +1,242 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script>
+	$(document).ready(function(){
+	    $("#check_all").click(function(){
+	        if($("#check_all").prop("checked")){
+	            $("input[name=input_check]").prop("checked",true);
+	        }else{
+	            $("input[name=input_check]").prop("checked",false);
+	        }
+	    })
+	});
+		</script>
+<style>
+#b {
+	float: left;
+	height: 200px;
+	width: 20%;
+}
+
+#c {
+	float: right;
+	width: 80%;
+	height: 100%
+}
+
+#d {
+	font-family: THE행복열매;
+	font-weight: bolder;
+	text-align: left;
+	font-size: 40px;
+}
+
+#da {
+	border: 1px solid black;
+	text-align: left;
+	width: 70%;
+	margin: 5px;
+}
+
+#e {
+	font-family: THE행복열매;
+	font-weight: bolder;
+	text-align: left;
+	font-size: 40px;
+}
+
+#ea {
+	border: 1px solid black;
+	text-align: left;
+	width: 100%;
+	margin: 5px;
+}
+
+td {
+	padding: 2px;
+	text-align: center;
+}
+
+.li_a {
+	font-weight: bold;
+	font-size: 15px;
+	margin: 5px;
+	text-align: left;
+	color: black;
+}
+a	{
+	color: black;
+}
+
+.li_b {
+	list-style-type: none;
+	float: left;
+	text-align: center;
+	display: inline-block;
+}
+
+.ul_a {
+	text-align: center;
+}
+
+.th_a {
+	text-align: center;
+	width: 10%;
+	height: 45px;
+}
+
+.th_b {
+	text-align: center;
+	width: 20%;
+	height: 45px;
+}
+
+.th_c {
+	text-align: center;
+	width: 40%;
+	height: 45px;
+}
+
+.th_d {
+	text-align: center;
+	width: 10%;
+	height: 45px;
+}
+
+.th_e {
+	text-align: center;
+	width: 10%;
+	height: 45px;
+}
+
+.th_f {
+	text-align: center;
+	width: 10%;
+	height: 45px;
+}
+
+#soldout_delete {
+	font-family: THE행복열매;
+	font-weight: bolder;
+	border: 1px solid #D1B2FF;
+	border-radius: 5px;
+	background-color: #D1B2FF;
+	font-size: 30px;
+	padding: 5px;
+	margin: 10px;
+	float: right;
+}
+</style>
+<script>
+function printList(result){
+	var $body = $("#list");
+	$.each(result, function(idx, fv){
+		var $tr = $("<tr>").appendTo($body);
+		var $td = $("<td>").appendTo($tr);
+		$("<input>").attr("type","checkbox").attr("class","del").attr("name","input_check").val(fv.no).appendTo($td);
+		if(fv.image==null){
+			$("<td>").text("이미지 없음").appendTo($tr);
+		} else {
+			$imagetd = $("<td>").appendTo($tr);
+			$("<img>").attr("src",fv.image).appendTo($imagetd);
+		}
+		$("<td>").text(fv.name).appendTo($tr);
+		$("<td>").text(fv.price).appendTo($tr);
+		$("<td>").text(fv.productDate).appendTo($tr);
+		if(fv.state==0)
+			$("<td>").text("판매 중").appendTo($tr);
+		else if(fv.state==1)
+			$("<td>").text("판매 완료").appendTo($tr);
+		$("<input>").attr("type","hidden").attr("class","issold").val(fv.state).appendTo($td);
+	})
+}
+$(function(){
+	$.ajax({
+		url :"/fontExample/api/favorite",
+		method:"get",
+		success:function(result){
+			printList(result);
+		},error:function(xhr){
+			alert("즐겨찾기 로드에 실패하였습니다.");
+		}
+	});
+	$("#check_delete").on("click",function(){
+		var ar = [];
+		$(".del").each(function(idx){
+			if($(this).prop("checked")){
+				ar.push($(this).val());
+			}
+		})
+		console.log(ar);
+		if(ar.length==0)
+			return;
+		var params = {
+				json:JSON.stringify(ar),
+				_method:'delete'
+		}
+		$.ajax({
+			url:"/fontExample/api/favorite",
+			method:"post",
+			data:params,
+			success:function(result){
+				location.reload();
+			}
+		})
+	});
+	$("#soldout_delete").on("click",function(){
+		var params = {
+			_method:'delete'
+		}
+		$.ajax({
+			url:"/fontExample/api/favorite/soldout",
+			method:"post",
+			data:params,
+			success:function(result){
+				location.reload();
+			}
+		})
+	});
+})
+</script>
+</head>
+<body>
+	<div>
+		<div>
+			<jsp:include page="myPageMenu.jsp" />
+		</div>
+		<div id="c">
+			<div id="e">즐겨찾기</div>
+			<div id="ea"></div>
+			<div>
+				<table class="table table-hover" id="choice">
+					<thead>
+						<tr>
+							<th class=th_a>전체 선택 <br> <input type="checkbox" id="check_all"></th>
+							<th class=th_b>사진</th>
+							<th class=th_c>제품명</th>
+							<th class=th_d>가격</th>
+							<th class=th_e>등록일</th>
+							<th class=th_f>판매여부</th>
+						</tr>
+					</thead>
+					<tbody id="list">
+					</tbody>
+				</table>
+			</div>
+			<div id="ea"></div>
+			<button id="soldout_delete" type="button">완료항목 삭제</button>
+		</div>
+	</div>
+</body>
+</html>

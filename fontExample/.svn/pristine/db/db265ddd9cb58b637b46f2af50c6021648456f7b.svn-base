@@ -1,0 +1,26 @@
+package com.icia.fontExample.Controller;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+
+import com.icia.fontExample.Service.*;
+
+@CrossOrigin(origins="*")
+@RestController
+public class JoinController {
+	@Autowired
+	private JoinService service;
+	
+	@GetMapping("/checkId")
+	public ResponseEntity<?> checkId(@RequestParam String username) {
+		service.checkId(username);
+		return ResponseEntity.ok("");
+	}
+	
+	@PostMapping("checkEmail")
+	public ResponseEntity<?> checkEmail(@RequestParam String email) {
+		service.checkEmail(email);
+		return ResponseEntity.ok("");
+	}
+}

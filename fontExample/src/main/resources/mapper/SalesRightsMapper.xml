@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SalesRightsMapper">
+<insert id="insertSales" useGeneratedKeys="true" keyProperty="tel">
+		<selectKey keyProperty="tel" resultType="string" order="BEFORE"> <!--  -->
+			select tel from member where username=#{username} 
+		</selectKey> 
+	insert into seller (username,name,count,tel,sns,amount,account,image)
+	values (#{username},#{name},0,#{tel},#{sns},0,#{account},#{image})
+</insert>
+<select id="checkName" resultType="String">
+	select name from seller where name=#{name} and rownum=1
+</select>
+<select id="checkSns" resultType="String">
+	select sns from seller where sns=#{sns} and rownum=1
+</select>
+<select id="checkAccount" resultType="String">
+	select account from seller where account=#{account} and rownum=1
+</select>
+</mapper>

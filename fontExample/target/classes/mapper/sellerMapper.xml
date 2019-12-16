@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sellerMapper">
+	<insert id="insert">
+		insert into seller(username, image, name, cnt, tel, sns, account) 
+		values(#{username},#{image},#{name},#{cnt},#{tel},#{sns},#{account})
+	</insert>
+	<select id="findSeller" resultType="seller">
+		select name, tel, sns from seller where username=#{username}
+	</select>
+	
+	<select id="findSellerAll" resultType="seller">
+		select username, image, name, count, tel, sns, account from seller where username=#{username}
+	</select>
+</mapper>

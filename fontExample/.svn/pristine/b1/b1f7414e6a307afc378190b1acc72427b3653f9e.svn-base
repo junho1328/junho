@@ -1,0 +1,17 @@
+package com.icia.fontExample.Dao;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.entity.*;
+
+@Repository
+public class ProductDao {
+
+	@Autowired
+	private SqlSessionTemplate tpl;
+	public int insert(Product product) {
+		return tpl.insert("ProductMapper.insert",product);
+	}
+}

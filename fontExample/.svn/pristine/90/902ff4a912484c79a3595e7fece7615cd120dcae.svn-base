@@ -1,0 +1,37 @@
+package com.icia.fontExample.Controller;
+
+import java.io.*;
+import java.security.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.*;
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.icia.fontExample.Dto.*;
+import com.icia.fontExample.Service.*;
+
+@RequestMapping("/api")
+@CrossOrigin("*")
+@RestController
+public class PurchaseRestController {
+	@Autowired
+	private PurchaseService service;
+
+	@PostMapping("/purchase/insert")
+	public ResponseEntity<?> insertPurchase(Principal principal,@RequestParam long no){
+		return ResponseEntity.ok(service.insertPurchase(principal.getName(),no));
+	}
+	
+	@PostMapping("/purchase/findPurchaseNo")
+	public ResponseEntity<?> findPurchaseNo(Principal principal,@RequestParam long no){
+		return ResponseEntity.ok(service.findPurchaseNo(principal.getName(),no));
+	}
+	@PostMapping("/purchase/pointwaiting")
+	public ResponseEntity<?> waitingPoint(Principal principal,@RequestParam long no, @RequestParam long point,@RequestParam String sellerUsername){
+		return ResponseEntity.ok(service.waitingPoint(principal.getName(),no , point, sellerUsername));
+	}
+	
+}

@@ -1,0 +1,22 @@
+package com.icia.fontExample.Dao;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.entity.*;
+
+@Repository
+public class SalesRightsDao {
+	@Autowired
+	private SqlSessionTemplate tpl;
+	// 판매자를 추가한다 , 권한을 추가한다
+	public int insert(Seller seller) {
+		 return tpl.insert("SalesRightsMapper.insertSales",seller);
+	}
+	public int delete(String username) {
+		return tpl.delete("withdrawalMapper.sellerdelete",username);
+	
+	}
+	
+}

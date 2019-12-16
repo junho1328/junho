@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="summaryMapper">
+	<select id="findCountByBuy" resultType="int" parameterType="string">
+		select /*+ index_ffs(summary summary_pk_no) */ count(no) from summary where buyer_Username=#{username}
+	</select>
+	
+	<select id="findCountBySell" resultType="int" parameterType="string">
+		select /*+ index_ffs(summary summary_pk_no) */ count(no) from summary where seller_Username=#{username}
+	</select>
+
+	<select id="findAllByBuyHistory" resultType="Summary">
+		<![CDATA[
+			select * from
+		       	(select rownum as rnum, b.* from 
+		       		(select s.no no, s.product_no productNo, s.buyer_Username buyerUsername, s.seller_Username sellerUsername, s.amount mount, s.check_Date checkDate, s.method method, p.name name, p.price price, p.image image, m.tel tel from summary s, product p, member m where buyer_username=#{username} and (s.product_no=p.no and s.buyer_username=m.username) order by no asc) b
+		       	where rownum<=#{endRowNum}) 
+		    where rnum>=#{startRowNum}
+		]]>
+	</select>
+	
+	<select id="findAllBySellHistory" resultType="Summary">
+		<![CDATA[
+			select * from
+		       	(select rownum as rnum, b.* from 
+		       		(select s.no no, s.product_no productNo, s.buyer_Username buyerUsername, s.seller_Username sellerUsername, s.amount mount, s.check_Date checkDate, s.method method, p.name name, p.price price, p.image image, m.tel tel from summary s, product p, member m where seller_username=#{username} and (s.product_no=p.no and s.seller_username=m.username) order by no asc) b
+		       	where rownum<=#{endRowNum}) 
+		    where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="no">
+		<selectKey keyProperty="no" order="BEFORE" resultType="int">
+			select summary_seq.nextval from dual
+		</selectKey>
+		insert into summary(no,product_no,buyer_username,seller_username,amount,quantity,check_date,method)
+		values(#{no},#{productNo},#{buyerUsername},#{sellerUsername},#{amount},#{quantity},sysdate,#{method})
+	</insert>
+	<delete id="deleteById">
+		delete from summary where no=#{no}
+	</delete>
+</mapper>

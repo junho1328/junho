@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sellMapper">
+	<insert id="insert">
+		insert into sell(no, product_no, username, area, infomation, image, date, block)
+		values(#{no},#{product_no},#{username},#{area},#{infomation},#{image},#{date},#{block})
+	</insert>
+	<select id="findAllSell" resultType="sell">
+		select no, product_no, username, area, infomation, image, date, block from sell
+	</select>
+	<select id="findSell" resultType="sell">
+	select no, product_no, username, area, infomation, image, date, block from sell
+	where no=#{no}
+	</select>
+	<delete id="delete">
+		delete from no where no=#{no}
+	</delete> 
+</mapper>

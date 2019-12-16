@@ -1,0 +1,193 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="/fontExample/ckeditor/ckeditor.js"></script>
+<style>
+#MB_Above {
+   height: 320px;
+   padding: 10px;
+}
+#MB_Below {
+   height: 900px;
+   padding: 10px;
+   margin: 10px;
+   background: #D5D5D5;
+}
+
+#R_img {
+   width: 250px;
+   height: 200px;
+   padding: 10px;
+}
+
+.MB_Id {
+   font-size: 30px;
+}
+
+.MB_Trust {
+   font-size: 30px;
+   color: blue;
+   font-family: THE행복열매;
+}
+
+#MB_One {
+   width: 40%;
+   height: 300px;
+   background: #D1B2FF;
+   float: left;
+}
+
+#MB_Two {
+   padding-left: 10px;
+   padding-top: 10px;
+   height: 300px;
+   float: right;
+   width: 60%;
+}
+
+.MB_Visit {
+   font-size: 15px;
+   width: 40%;
+   float: left;
+   text-align: left;
+}
+
+.Sell_Cnt {
+   font-size: 15px;
+   text-align: left;
+   width: 40%;
+   float: left;
+}
+
+.Report {
+   font-size: 20px;
+   width: 20%;
+   color: red;
+   float: right;
+   text-align: right;
+   font-weight: bolder;
+}
+
+#Two_a {
+   height: 30%;
+}
+
+#Two_b {
+   padding: 10px;
+   text-align: left;
+   height: 70%;
+   background: #D5D5D5;
+   font-size: 15px;
+}
+
+.MB_Visit, .Sell_Cnt {
+   font-size: 23px;
+   font-weight: bold;
+   font-family: THE행복열매;
+}
+
+#report {
+   width: 50px;
+   height: 30px;
+}
+
+.Review_Pr {
+   font-weight: bolder;
+   font-size: 23px;
+}
+
+.Review_SellMb, .Review_Mb, .Product_Name, .Imgupload {
+   font-size: 20px;
+   text-align: left;
+   padding-left: 30px;
+}
+
+.Imgupload {
+   
+}
+
+#Img1, #Img2, #Img3 {
+   margin: 10px;
+   width: 200px;
+   height: 200px;
+}
+
+#Review_Text, #Review_Trust {
+   font-size: 20px;
+}
+
+.trust {
+   padding: 5px;
+}
+
+#end {
+   font-family: THE행복열매;
+   font-weight: bolder;
+   border: 1px solid #D1B2FF;
+   border-radius: 5px;
+   background-color: #D1B2FF;
+   font-size: 30px;
+   padding: 5px;
+}
+</style>
+</head>
+<body>
+
+   <div id="MB_Above">
+      <div id="MB_One">
+         <div>
+            <img id="R_img" src="resources/Music.jpg"> <br>
+            <p class="MB_Id"> 스토어 명 </p>
+            <p class="MB_Trust">신뢰도 &nbsp; : &nbsp;&nbsp; 900</p>
+         </div>
+      </div>
+      <div id="MB_Two">
+         <div id="Two_a">
+            <br>
+            <p class="MB_Visit">방문자 수 :</p>
+            <p class="Sell_Cnt">판매 횟수 :</p>
+            <p class="Report">
+               <img id="report" src="resources/report.jpg">신고하기
+            </p>
+         </div>
+         <div id="Two_b">판매자 정보 <br> <br>
+         주소 &nbsp; : &nbsp;&nbsp; <br> <br>
+         전화번호 &nbsp; : &nbsp;&nbsp; <br> <br>
+         카톡 아이디 &nbsp; : &nbsp;&nbsp; <br> <br>
+         판매하는 물품들의 내용 &nbsp; : &nbsp;&nbsp; <br> <br>
+         </div>
+      </div>
+   </div>
+   <div id="MB_Below">
+      <p class="Review_Pr">리뷰 작성</p>
+      <p class="Review_SellMb">판매자 아이디 &nbsp; : &nbsp;&nbsp; 선생님 </p>
+      <p class="Product_Name">제품명 &nbsp; : &nbsp;&nbsp; 분필 </p>
+      <table>
+         <tr id="Review_Text" valign="top">
+            <td>&nbsp;&nbsp;&nbsp;&nbsp; 후기 &nbsp; : &nbsp;</td>
+            <td><textarea name="editor2"></textarea> <script>
+               CKEDITOR.replace('editor2');
+            </script></td>
+         </tr>
+         <tr id="Review_Trust">
+            <td>&nbsp;&nbsp;&nbsp;&nbsp; 신뢰도 &nbsp; : &nbsp;</td>
+            <td class="trust"><input type="radio" name="trust"
+               value="Plus" style="width: 20px; height: 20px;"> + &nbsp; /
+               &nbsp;<input type="radio" name="trust" value="Minus"
+               style="width: 20px; height: 20px;"> ─</td>
+         </tr>
+      </table>
+      <button id="end" type="button">작성 완료</button>
+   </div>
+</body>
+</html>

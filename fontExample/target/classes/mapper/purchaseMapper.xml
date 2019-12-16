@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="purchaseMapper">
+	<insert id="insert">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select purchase_seq.nextval from dual <!--  하나씩 올라 가는 값 -->
+		</selectKey>
+		insert into purchase(no, product_no,address_no, username, seller, amount, quantity, method, state, purchase_date)
+		values(#{no},#{product_no},#{address_no},#{username},#{seller},#{amount},#{quantity},#{method},1,sysdate)
+	</insert>
+	<select id="findPurchaseNo" resultType="long">
+		select no from purchase where product_no = #{product_no} and username = #{username}
+	</select>
+	<select id="conutByPurchase" resultType="int">
+		select count(*) from purchase
+		where username=#{username}
+	</select>
+	<select id="findPurchaseBuyer" resultType="purchase">
+	<![CDATA[
+		select * from
+		(
+		select rownum as rnum, p.* from
+		(
+		select no,product_no,address_no,username,seller,amount,quantity,method,state,purchase_date purchaseDate
+		from purchase
+		where username=#{username}
+		) p
+		where rownum<=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findPurchaseSeller" resultType="purchase">
+	<![CDATA[
+		select * from
+		(
+		select rownum as rnum, p.* from
+		(
+		select no,product_no,address_no,username,seller,amount,quantity,method,state,purchase_date purchaseDate
+		from purchase
+		where seller=#{username}
+		) p
+		where rownum<=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findPurchaseByNo" resultType="purchase">
+		select no,product_no,address_no,username,seller,amount,quantity,method,state,purchase_date purchaseDate
+		from purchase
+		where no=#{no} and rownum=1
+	</select>
+	<update id="updatestate">
+		update purchase set state=2
+		where no=#{no} and rownum=1
+	</update>
+	<delete id="delete">
+		delete from purchase where no=#{no} and rownum=1
+	</delete>
+</mapper>

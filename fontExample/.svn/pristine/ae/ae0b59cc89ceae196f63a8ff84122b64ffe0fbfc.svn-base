@@ -1,0 +1,41 @@
+package com.icia.fontExample.Dao;
+
+import java.util.*;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.entity.*;
+
+@Repository
+public class DeclarationDao {
+	@Autowired
+	private SqlSessionTemplate tpl; // SqlSessionTemplate 은 쓰레드에 안전하고 여러개의 DAO나 매퍼에서 공유
+	
+	public int update(String reason) {
+		return tpl.update("declarationMapper.declarationUpdate",reason);
+	}
+	// entity에서 불러와서 신고자체를 넘겨줌 
+	public int insert(Declaration declaration){
+		return tpl.insert("declarationMapper.insert",declaration); // 신고자체를 넘겨줌
+	
+	}
+	public List<Declaration> findAll(){
+		return tpl.selectList("declarationMapper.declarationView");
+	}
+	public int findCount() {
+		return tpl.selectOne("declarationMapper.findCount");
+	}
+	public List<Declaration> findByPage(int startRowNum, int endRowNum){
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("startRowNum",startRowNum);
+		map.put("endRowNum",endRowNum);
+		return tpl.selectList("declarationMapper.declarationByPage",map);
+	}
+	// 번호를 받는다
+	public Declaration detailView(long no) {
+		return tpl.selectOne("declarationMapper.detailView",no); // 번호 넘겨줌
+	}
+	
+}

@@ -1,0 +1,24 @@
+package com.icia.fontExample.entity;
+
+import java.util.*;
+
+import com.fasterxml.jackson.annotation.*;
+
+import lombok.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Sell {
+
+	public long no;
+	public long prdouct_no;
+	public String username;
+	public String area;
+	public String infomation;
+	public String image;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	public Date date;
+	public long block;
+}

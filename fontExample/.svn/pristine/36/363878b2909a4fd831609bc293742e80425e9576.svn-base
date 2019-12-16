@@ -1,0 +1,259 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="/fontExample/ckeditor/ckeditor.js"></script>
+<style>
+#MB_Above {
+	height: 320px;
+	padding: 10px;
+}
+
+#MB_Below {
+	text-align: left;
+	border-collapse: collapse;
+	height: 900px;
+	padding: 10px;
+	margin: 10px;
+	background: #D5D5D5;
+	position: relative;
+}
+
+#R_img {
+	width: 250px;
+	height: 200px;
+	padding: 10px;
+}
+
+.MB_Id {
+	font-size: 30px;
+}
+
+.MB_Trust {
+	font-size: 30px;
+	color: blue;
+}
+
+#MB_One {
+	width: 40%;
+	height: 300px;
+	background: #D1B2FF;
+	float: left;
+}
+
+#MB_Two {
+	padding-left: 10px;
+	padding-top: 10px;
+	height: 300px;
+	float: right;
+	width: 60%;
+}
+
+.MB_Visit {
+	font-size: 15px;
+	width: 40%;
+	float: left;
+	text-align: left;
+}
+
+.Sell_Cnt {
+	font-size: 15px;
+	text-align: left;
+	width: 40%;
+	float: left;
+}
+
+.Report {
+	font-size: 20px;
+	width: 20%;
+	float: right;
+	text-align: right;
+	font-weight: bolder;
+}
+
+#Two_a {
+	height: 30%;
+}
+
+#Two_b {
+	padding: 10px;
+	text-align: left;
+	height: 70%;
+	background: #D5D5D5;
+	font-size: 15px;
+}
+
+.MB_Visit, .Sell_Cnt {
+	font-size: 23px;
+	font-weight: bold;
+}
+
+#report {
+	width: 50px;
+	height: 30px;
+}
+
+#sellname {
+	font-size: 30px;
+	padding: 10px;
+}
+
+.eachReview_s {
+	border-top: 2px solid black;
+	position: relative;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.profileSajin_m {
+	width: 50px;
+	height: 50px;
+}
+
+.reviewDetail_d {
+	padding-left: 60px;
+	padding-right: 20px;
+	position: relative;
+	bottom: 20px;
+}
+
+.reviewerPersonalInformation_a {
+	position: relative;
+	bottom: 25px;
+	border-bottom: 1px solid lightgrey;
+	border-collapse: collapse;
+	padding-bottom: 15px;
+}
+
+.postedDate_d {
+	padding-right: 10px;
+	margin-right: 10px;
+	padding-left: 10px;
+	margin-left: 10px;
+	border-right: 2px solid lightgray;
+	border-left: 2px solid lightgray;
+}
+
+.sellerName_n {
+	padding-right: 20px;
+}
+
+.likeOrNotlike_l {
+	border: 1px solid white;
+}
+
+.wholeProductReview_p {
+	font-size: 12px;
+}
+
+.productName_pn {
+	padding: 5px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.reviewTitle_rt {
+	padding: 5px;
+	font-size: 18px;
+}
+
+.reviewArticle_r {
+	font-size: 14px;
+}
+
+#plus {
+	font-family: THE행복열매;
+	font-weight: bolder;
+	border: 1px solid #D1B2FF;
+	border-radius: 5px;
+	background-color: #D1B2FF;
+	font-size: 30px;
+	padding: 5px;
+	position: absolute;
+	bottom: 1%;
+	right: 50%;
+}
+</style>
+</head>
+<body>
+
+	<div id="MB_Above">
+		<div id="MB_One">
+			<div>
+				<img id="R_img" src="resources/Music.jpg"> <br>
+				<p class="MB_Id"> 스토어 명 </p>
+				<p class="MB_Trust">신뢰도 &nbsp; : &nbsp;&nbsp; 900</p>
+			</div>
+		</div>
+		<div id="MB_Two">
+			<div id="Two_a">
+				<br>
+				<p class="MB_Visit">방문자 수 :</p>
+				<p class="Sell_Cnt">판매 횟수 :</p>
+				<p class="Report"><a href="/fontExample/declaration" style="color: red;">신고하기</a></p>
+			</div>
+			<div id="Two_b">
+				판매자 정보 <br> <br> 주소 &nbsp; : &nbsp;&nbsp; <br> <br>
+				전화번호 &nbsp; : &nbsp;&nbsp; <br> <br> 카톡 아이디 &nbsp; :
+				&nbsp;&nbsp; <br> <br> 판매하는 물품들의 내용 &nbsp; : &nbsp;&nbsp;
+				<br> <br>
+			</div>
+		</div>
+	</div>
+	<div id="MB_Below">
+		<div id="sellname">Sell REVIEW</div>
+		<div class="eachReview_s">
+			<img src="jhs.jpg" class="profileSajin_m">
+			<div class="reviewDetail_d">
+				<div class="reviewerPersonalInformation_a">
+					<span> 리뷰자아이디 </span> <span class="postedDate_d">등록날짜</span> 판매자 :
+					<a class="sellerName_n"> 이녀석 </a> 
+				</div>
+				<div>
+					<a class="wholeProductReview_p"> 펼쳐보기 </a>
+					<div class="productName_pn">담배</div>
+
+					<blockquote class="reviewArticle_r">
+						<div class="reviewTitle_rt">잘 받았어요</div>
+						ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+						ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+						ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+					</blockquote>
+				</div>
+			</div>
+		</div>
+		<div id="sellname">Sell REVIEW</div>
+		<div class="eachReview_s">
+			<img src="jhs.jpg" class="profileSajin_m">
+			<div class="reviewDetail_d">
+				<div class="reviewerPersonalInformation_a">
+					<span> 리뷰자아이디 </span> <span class="postedDate_d">등록날짜</span> 판매자 :
+					<a class="sellerName_n"> 저녀석 </a> 
+				</div>
+				<div>
+					<a class="wholeProductReview_p"> 펼쳐보기</a>
+					<div class="productName_pn">초콜릿</div>
+
+					<blockquote class="reviewArticle_r">
+						<div class="reviewTitle_rt">이딴 거 사지마세요</div>
+						ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ
+						ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ
+						ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ
+					</blockquote>
+				</div>
+			</div>
+		</div>
+		<a id="plus" href="javascript:moreContent('more_list', 10);"> 리뷰 더
+			보기 </a>
+	</div>
+</body>
+</html>

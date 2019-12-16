@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="declarationMapper">
+
+	<update id="declarationUpdate">
+		update declaration set declaration_count =declaration_count+1 where
+		declaration_reason=#{declaration_reason}
+	</update>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="no">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select declaration_seq.nextval from dual <!--  하나씩 올라 가는 값 -->
+		</selectKey> 
+		insert into declaration(no,username,declaration_username,reason_no,content,declaration_date) 
+		values(#{no},#{username},#{declaration_username},#{reason_no},#{content},sysdate)
+	</insert>
+	<select id="detailView" resultType="declaration">
+		select no , username , declaration_username , reason_no , content , declaration_date from declaration where no=#{no} <!-- 번호를 준다 -->
+	</select>
+	
+	<select id="declarationByPage" resultType="declaration">
+	<!-- CDATA 문자 그대로 해석  -->
+	<![CDATA[ 
+		select * from
+		(
+		select rownum as rnum, P.* from
+		(select /*+ index_desc(declaration pk_declaration)*/  no , username , declaration_username , reason_no , content , declaration_date from declaration) P
+		where rownum <=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findCount" resultType="int">
+		select /*+ index_ffs(declaration pk_declaration) */ count(no) from declaration
+	</select>
+	</mapper>

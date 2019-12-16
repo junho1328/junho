@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- null 입력 전면 허용임 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.icia.fontExample.entity.sellManagement" alias="sellManagement"/>
+		<typeAlias type="com.icia.fontExample.entity.memberManagement" alias="memberManagement"/>
+		<typeAlias type="com.icia.fontExample.entity.Declaration" alias="declaration"/>
+		<typeAlias type="com.icia.fontExample.entity.Exchange" alias="exchange"/>
+		<typeAlias type="com.icia.fontExample.entity.Product" alias="product"/>
+		<typeAlias type="com.icia.fontExample.entity.MyReview" alias="myReview"/>
+		<typeAlias type="com.icia.fontExample.entity.Summary" alias="summary"/>
+		<typeAlias type="com.icia.fontExample.entity.Sell" alias="sell"/>
+		<typeAlias type="com.icia.fontExample.entity.SellerReview" alias="sellerReview"/>
+		<typeAlias type="com.icia.fontExample.entity.Member" alias="member"/>
+		<typeAlias type="com.icia.fontExample.entity.Favorite" alias="favorite"/>
+		<typeAlias type="com.icia.fontExample.entity.Inquiry" alias="inquiry"/>
+		<typeAlias type="com.icia.fontExample.entity.Seller" alias="seller"/>
+		<typeAlias type="com.icia.fontExample.entity.ReadProduct" alias="readProduct"/>
+		<typeAlias type="com.icia.fontExample.entity.Payment" alias="payment"/>
+		<typeAlias type="com.icia.fontExample.entity.ProductInquiry" alias="productInquiry"/>
+		<typeAlias type="com.icia.fontExample.entity.Statistics" alias="statistics"/>
+		<typeAlias type="com.icia.fontExample.entity.Tag" alias="tag"/>
+		<typeAlias type="com.icia.fontExample.entity.RelatedProducts" alias="relatedProducts"/>
+		<typeAlias type="com.icia.fontExample.entity.LargeCategory" alias="largeCategory"/>
+		<typeAlias type="com.icia.fontExample.entity.SmallCategory" alias="smallCategory"/>
+		<typeAlias type="com.icia.fontExample.entity.Purchase" alias="purchase"/>
+		<typeAlias type="com.icia.fontExample.entity.Notice" alias="notice"/>
+		<typeAlias type="com.icia.fontExample.entity.WaitingPoint" alias="wp"/>
+		<typeAlias type="com.icia.fontExample.entity.InquiryAnswer" alias="inquiryAnswer"/>
+		<typeAlias type="com.icia.fontExample.entity.Certification" alias="certification"/>
+	</typeAliases>
+</configuration>

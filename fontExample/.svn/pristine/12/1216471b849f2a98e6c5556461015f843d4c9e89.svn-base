@@ -1,0 +1,20 @@
+ package com.icia.fontExample.entity;
+
+import java.util.*;
+
+import com.fasterxml.jackson.annotation.*;
+
+import lombok.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Purchase {
+	private long no;
+	private long product_no;
+	private String address;
+	private String username;
+	private int method;
+	private int state;
+}

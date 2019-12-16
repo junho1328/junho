@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sellMapper">
+	<insert id="insert">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select sell_seq.nextval from dual <!--  하나씩 올라 가는 값 -->
+		</selectKey>
+		insert into sell(no, product_no, username, area, infomation, image, sell_date, block)
+		values(#{no},#{product_no},#{username},#{area},#{infomation},#{image},sysdate,#{block})
+	</insert>
+	<select id="findAllSell" resultType="sell">
+		select no, product_no, username, area, infomation, image, sell_date, block from sell where username=#{username}
+	</select>
+	<select id="findSell" resultType="sell">
+		select no, product_no, username, area, infomation, image, sell_date, block from sell
+	</select>
+	<select id="findSellerByNo" resultType="string">
+		select username from sell where product_no = #{no}
+	</select>
+	<delete id="delete">
+		delete from no where no=#{no}
+	</delete> 
+	<select id="findAllSalesArtice" resultType="sell">
+		select no, image, username, area, name, price, sell_date, block from sell  
+	</select>
+		<select id="findUsername" resultType="string">
+		select username from sell where product_no=#{no}
+	</select>
+	
+</mapper>

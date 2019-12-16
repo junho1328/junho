@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exchangeMapper">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="no">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select change_seq.nextval from dual
+		</selectKey>
+		insert into	change(no,username,name,amount,bank,account,change_date)
+		values(#{no},#{username},#{name},#{amount},#{bank},#{account},sysdate)
+	</insert>
+	<select id="findAll" resultType="exchange">
+		select	no,username,name,amount,bank,account,change_date changeday from change
+	</select>
+			<select id="findCount" resultType="int">
+		select /*+ index_ffs(change pk_change) */ count(no) from change
+	</select>
+	<select id="findExchangeNo" resultType="long">
+		select no from change where no=#{no}
+	</select>
+	<select id="findExchangeID" resultType="String">
+		select username from change
+		where username=#{username}
+	</select>
+	<select id="findExchangeName" resultType="String">
+		select username from change
+		where name=#{name}
+	</select>
+		<select id="exchangePage" resultType="exchange">
+	<!-- CDATA 문자 그대로 해석  -->
+	<![CDATA[ 
+		select * from(
+		select rownum as rnum, C.* from
+		(select /*+ index_desc(change pk_change)*/  no,username,name,amount,bank,account,change_date from change) C
+		where rownum <=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findExchangeDay" resultType="Date">
+		select change_date changeday from change
+		where changeday=#{changeday}
+	</select>
+	<delete id="delete">
+		delete from change where no=#{no}
+	</delete>
+</mapper>

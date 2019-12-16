@@ -1,0 +1,32 @@
+package com.icia.fontExample.Service;
+
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.Dao.*;
+import com.icia.fontExample.entity.*;
+
+@Service
+public class Seller_ReviewService {
+
+	@Autowired
+	private Seller_ReviewDao dao;
+	
+	public int insert(Seller_Review seller_review) {
+		return dao.insert(seller_review);
+	}
+
+	public List<Seller_Review> findAllSeller_Review() {
+		return dao.findAllSeller_Review();
+	}
+
+	public List<Seller_Review> findSeller_Review(long no) {
+		return dao.findSeller_Review(no);
+	}
+
+	public void delete(long no) {
+		dao.delete(no);
+	}
+}

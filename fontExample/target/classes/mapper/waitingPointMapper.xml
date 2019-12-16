@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="waitingPointMapper">
+
+	<insert id="insert">
+		insert into waiting_point(no,buyer_username,seller_username,point)
+		values(#{no},#{buyUsername},#{sellUsername},#{point})
+	</insert>
+	<select id="findByNo" resultType="wp">
+		select no,buyer_username buyUsername,seller_username sellUsername,point
+		from waiting_point
+		where no=#{no}
+	</select>
+	<delete id="delete">
+		delete from waiting_point where no=#{no}
+	</delete>
+</mapper>

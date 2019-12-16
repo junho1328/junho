@@ -1,0 +1,27 @@
+package com.icia.fontExample.Dao;
+
+import java.util.*;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+@Repository // �씫�뼱�뱾�씪 �븣 Component == ( Controller Repository Service ) �떎 踰붿슜 
+public class WithdrawalDao {
+	@Autowired // 媛숈�嫄� 
+	private SqlSessionTemplate tpl;
+	
+	public int delete(String username) {
+		return tpl.delete("withdrawalMapper.delete",username);
+	}
+	public int update(String reason) {
+		return tpl.update("withdrawalMapper.update",reason);
+	}
+	public int insert(String reason_detail) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("no",1);
+		map.put("reason_detail",reason_detail);
+		return tpl.insert("withdrawalMapper.insert",map);
+	}
+
+}

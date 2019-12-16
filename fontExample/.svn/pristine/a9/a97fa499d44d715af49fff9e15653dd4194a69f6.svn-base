@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	<insert id="insert">
+		insert into member(username, password, name, email, trust, enabled, point, tel, login_failure_cnt)
+		values(#{username}, #{password}, #{name}, #{email}, 0, 1, 0, #{tel}, 0)
+	</insert>
+	
+	<select id="findById" resultType="member">
+		select username, name, tel, email from member where username=#{username} and rownum=1
+	</select>
+	
+	<select id="findMemberByUsername" resultType="member">
+		select name, email, tel from member where username=#{username} and rownum=1
+	</select>
+	
+	<select id="findUsernameByNameAndTel" resultType="string">
+		select username from member where name=#{name} and tel=#{tel} and rownum=1 
+	</select>
+	
+	<select id="changePwd" resultType="string">
+		select username from member where name=#{name} and tel=#{tel} and rownum=1 
+	</select>
+	<select id="findBlock" resultType="string">
+		select block from member where username=#{username} and rownum=1
+	</select>
+	<select id="updateBlock" resultType="int">
+		update member set block=#{block} where username=#{username}
+ 	</select>
+	<select id="findPasswordByNameAndTel" resultType="string">
+		select password from member where name=#{name} and tel=#{tel} and rownum=1
+	</select>
+	
+	<update id="updatePassword">
+		update member set password=#{password} where username=#{username}
+	</update>
+	<select id="findAllMember" resultType="memberManagement">
+		select member.name, member.username, authorities.authority, member.point ,seller.count, member.enabled
+		from member,authorities,seller where member.username=authorities.username and authorities.username=seller.username
+	</select>
+
+	<!-- 
+		컬럼 별칭을 지정할 때 띄어쓰기를 포함하는 등 허용되지 않는 별칭으로 지정하고 싶다면 " "로 둘러싼다
+		levels as level에서 별칭 level이 오라클 예약어로 허용되지 않는 별칭이라서 levels as "level"로 작성
+	 
+	<select id="findById" resultType="user">
+		select username, name, tel, email, birthday, joinday, login_count logincount, write_count writecount, password, 
+		levels "level", profile from member where username=#{username} and rownum=1
+	</select>
+	-->
+	<update id="updateName">
+		update member set name=#{name} where username=#{username}
+	</update>
+
+	<!--
+		이름, 전화번호, 이메일, 프로필을 변경할 수 있다 -> 반드시 변경한다는 말은 아니다. 일부만 변경할 수도 있다 -> 동적 update 쿼리
+	 -->
+	<update id="update">
+		update member
+		<set>
+      		<if test="irum != null">irum = #{irum},</if>
+      		<if test="tel != null">tel = #{tel},</if>
+      		<if test="tel != null">tel = #{tel},</if>
+      		<if test="email != null">email = #{email},</if>
+      		<if test="profile != null">profile = #{profile},</if>
+      		<if test="username != null">username = #{username}</if>
+		</set>
+		where username=#{username}
+	</update>
+	
+</mapper>

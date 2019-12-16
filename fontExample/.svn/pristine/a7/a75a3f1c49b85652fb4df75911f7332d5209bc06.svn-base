@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeMapper">
+	<insert id="insert">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select notice_seq.nextval from dual <!--  하나씩 올라 가는 값 -->
+		</selectKey>
+		insert into notice(no, title, username, content, notice_date)
+		values(#{no}, #{title}, #{username}, #{content}, sysdate)
+	</insert>
+	<update id="update">
+		update notice set title=#{title}, content=#{content}, notice_date = sysdate where no=#{no}      
+	</update>
+	<select id="noticeByNo" resultType="notice">
+		select no, title, username, content, notice_date from notice
+		where no=#{no}
+	</select>
+	
+	<select id="findCount" resultType="int">
+		select /*+ index_ffs(notice pk_notice) */ count(no) from notice
+	</select>
+	
+	<select id="noticeByPage" resultType="notice">
+	<!-- CDATA 문자 그대로 해석  -->
+	<![CDATA[ 
+		select * from
+		(
+		select rownum as rnum, P.* from
+		(select /*+ index_desc(notice pk_notice)*/  no ,title, username , content, notice_date from notice) P
+		where rownum <=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+</mapper>

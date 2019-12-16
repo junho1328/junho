@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- null 입력 전면 허용 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.icia.fontExample.entity.Exchange" alias="exchange"/>
+		<typeAlias type="com.icia.fontExample.entity.Product" alias="product"/>
+		<typeAlias type="com.icia.fontExample.entity.Sell" alias="sell"/>
+		<typeAlias type="com.icia.fontExample.entity.Seller_Review" alias="seller_reivew"/>
+	</typeAliases>
+</configuration>

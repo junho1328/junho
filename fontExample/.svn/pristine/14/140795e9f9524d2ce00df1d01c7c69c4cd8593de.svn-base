@@ -1,0 +1,136 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style>
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+
+div {
+	border: 0px solid black;
+}
+
+#purchase {
+	width: 700px;
+	padding: 5px;
+	background-color: #FFB6C1;
+}
+
+.innner {
+	background-color: #FFFFFF;
+	margin-bottom: 5px;
+}
+
+.block {
+	display: inline-block;
+}
+
+.block-right {
+	display: inline-block;
+	float: right;
+}
+
+.image {
+	width: 50px;
+	height: 50px;
+}
+.center{
+	text-align:center;
+}
+</style>
+</head>
+<body>
+	<div id="purchase">
+		<div id="purchaseinfo" class="innner">
+			<div>주문상품</div>
+			<div>
+				<div>
+					스토어이름<br>
+				</div>
+				<div>
+					<img src="resources/sample.PNG" class="image">상품명
+				</div>
+				<div>
+					<div class="block">수량</div>
+					<div class="block-right">가격</div>
+				</div>
+			</div>
+		</div>
+		<div id="gaininfo" class="innner">
+			배송지 선택<br>
+			<div class="block">
+				배송지 : 
+			</div>
+			<div class="block">
+				<input type="text"><button class="btn btn-default">주소 검색</button><br>
+			 	<input type="text"><br>
+			 	<input type="text"><br>
+			 </div><br>
+			 <div>
+		<select>
+  			<option value="volvo">Volvo</option>
+  			<option value="saab">Saab</option>
+ 			<option value="mercedes">Mercedes</option>
+  			<option value="audi">Audi</option>
+		</select>
+		<br>
+		<textarea rows="4" cols="50" placeholder="추가 요청사항을 입력해주세요"></textarea>
+		</div>
+		</div>
+		<div id="purcharsmoney" class="innner">
+			<div>
+				결제금액<br>
+				<hr width="80%">
+			</div>
+			<div>
+				<div class="block">상품금액</div>
+				<div class="block-right">가격</div>
+			</div>
+			<div>
+				<div class="block">배송비</div>
+				<div class="block-right">가격</div>
+			</div>
+			<div>
+				<div class="block">이벤트</div>
+				<div class="block-right">가격</div>
+			</div>
+			<div>
+				<div class="block">수수료</div>
+				<div class="block-right">가격</div>
+			</div>
+			<div>
+				<div class="block">최종 결제금액</div>
+				<div class="block-right">가격</div>
+			</div>
+		</div>
+		<div id="yakgun" class="innner">
+			<div>
+				<input type="checkbox">약관동의(전체동의)<br>
+			</div>
+			<div>
+				<div class="block">
+					<input type="checkbox" id="agree1">약관1
+				</div>
+				<div class="block-right">
+					<a href="#">자세히</a>
+				</div>
+			</div>
+		</div>
+		<div class="center">
+			<button class="btn btn-warning">충전하기</button>
+			<button class="btn btn-default">결제하기</button>
+		</div>
+	</div>
+</body>
+</html>

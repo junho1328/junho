@@ -1,0 +1,394 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>Insert title here</title>
+	<style>
+		* {
+			margin: 0 auto;
+			padding: 0;
+		}
+
+		#infomain {
+			overflow: hidden;
+		}
+
+		#topimg {
+			width: 100%;
+			height: 100%;
+		}
+
+		#topimgdiv {
+			float: left;
+			width: 40%;
+			height: 240px;
+			border: 1px solid pink;
+		}
+
+		#topinfo {
+			float: right;
+			width: 60%;
+			height: 240px;
+			border: 1px solid pink;
+			text-align: left;
+			padding: 5px;
+		}
+
+		.pfont {
+			font-weight: 900;
+		}
+
+		.clbtn {
+			background-color: rgb(255, 182, 193);
+			color: white;
+			height: 30px;
+			font-weight: bold;
+			width: 33%;
+			border: none;
+			padding: 3px;
+			display: inline-block;
+		}
+
+		.clbtn:hover {
+			color: white;
+			text-decoration: none;
+		}
+
+		.clbtn:visited {
+			color: white;
+			text-decoration: none;
+		}
+
+		#likebtn {
+			background-color: rgb(255, 132, 166);
+			color: white;
+			height: 30px;
+			font-weight: bold;
+			width: 25%;
+			border: none;
+			display: inline-block;
+			padding: 5px;
+		}
+
+		#buybtn {
+			background-color: rgb(255, 158, 186);
+			color: white;
+			height: 30px;
+			font-weight: bold;
+			width: 25%;
+			border: none;
+			display: inline-block;
+			padding: 5px;
+		}
+
+		#sgbtn {
+			background-color: rgb(255, 121, 136);
+			color: white;
+			height: 30px;
+			font-weight: bold;
+			width: 25%;
+			border: none;
+			padding: 5px;
+			display: inline-block;
+		}
+
+		#likebtn:hover {
+			color: white;
+			text-decoration: none;
+		}
+
+		#buybtn:hover {
+			color: white;
+			text-decoration: none;
+		}
+
+		#sgbtn:hover{
+			color: white;
+			text-decoration: none;
+		}
+		
+		#sgbtn:visited{
+			color: white;
+			text-decoration: none;
+		}
+
+		#likebtn:visited{
+			color: white;
+			text-decoration: none;
+		}
+
+		#buybtn:visited{
+			color: white;
+			text-decoration: none;
+		}
+
+		#sibal {
+			text-align: center;
+		}
+
+		#infobtn {
+			text-align: center;
+			float: right;
+			width: 100%;
+		}
+
+		#infomain2 {
+			width: 100%;
+		}
+
+		.infoimg {
+			border: 1px solid aliceblue;
+			width: 80%;
+			height: 50%;
+			padding: 10px;
+		}
+
+		#infotextread {
+			width: 80%;
+			height: 50%;
+		}
+		#sellinfo{
+			width:100%;
+			height: 280px;
+			background-color: rgb(255, 241, 242);
+		}
+		#sellinfoimg{
+			float: left;
+			width: 40%;
+		}
+		#sellinfotext{
+			float: right;
+			width: 60%;
+		}
+		#sellimg{
+			padding: 30px;
+			padding-top: 60px;
+			width: 200px;
+			height: 200px;
+		}
+		#sellinfotext2{
+			text-align: left;
+			margin: 30px;
+			padding-top: 30px;
+			font-weight: 900;
+		}
+		#selltext10{
+			width: 100%;
+			height:10%;
+			padding: 5px;
+		}
+		#sellh3{
+			text-align: left;
+		}
+		#qnadiv{
+			width: 100%;
+			background-color: rgb(255, 241, 242);
+			height: 90px;
+		}
+		#productqna{
+			width: 100%;
+			height:10%;
+			padding: 5px;
+		}
+		#producth3{
+			text-align: left;
+		
+		}
+		
+		.sustyle{
+			width: 90%;
+			height: 30px;
+		}
+		
+		.subtn{
+			background-color: rgb(255, 121, 136);
+			color: white;
+			height: 30px;
+			font-weight: bold;
+			width: 5%;
+			border: none;
+			padding: 5px;
+			display: inline-block;
+		}
+		details{
+			text-align: left;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		#anisibal{
+			text-align: left;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		#sibaldiv{
+			width: 100%;
+			background-color: rgb(255, 241, 242);
+		}
+		.pagecolor{
+			color:red;
+		}
+	</style>
+<script>
+</script>
+</head>
+
+<body>
+	<div id="infomain">
+		<div id="topimgdiv">
+			<img src="resources/as.jpg" id="topimg">
+		</div>
+		<div id="topinfo">
+			<ul>
+				<li>
+					<p class="pfont">제　품　명 :　무엇을 찾기 위해</p>
+				</li>
+				<li>
+					<p class="pfont">가　　　격 :　이 길을 헤메이나</p>
+				</li>
+				<li>
+					<p class="pfont">수　　　량 :　어두운 과거 속에</p>
+				</li>
+				<li>
+					<p class="pfont">거 래 지 역 :　기억들을 찾기 위해</p>
+				</li>
+				<li>
+					<p class="pfont">태　　　그 :　#가 #오 #가 #이 #거</p>
+				</li>
+				<li>
+					<p class="pfont">등　록　일 :　2019.11.06　　　　　조회수: 10</p>
+				</li>
+				<div id="sibal">
+					<li>
+						<a href="#" id="sgbtn">신고하기</a>　　
+						<a href="#" id="likebtn">즐겨찾기</a>　　
+						<a href="#" id="buybtn">구매하기</a>
+					</li>
+				</div>
+			</ul>
+		</div>
+		<div id="infobtn">
+			<a href="#infomain2" class="clbtn">상세 정보</a>
+			<a href="#sellinfo" class="clbtn">판매자 정보</a>
+			<a href="#productqna" class="clbtn">제품 문의</a>
+		</div>
+		<div id="infomain2">
+			<img src="resources/as.jpg" class="infoimg">
+			<img src="resources/as.jpg" class="infoimg">
+			<img src="resources/as.jpg" class="infoimg">
+		</div>
+		<div id="infotextread">
+			<p>
+				엄마, 사람을 죽였어요
+				그의 머리를 향해 총을 들이대고
+				방아쇠를 당겼어요
+				그는 죽었어요!
+				엄마... 삶이 이제야 시작됐었는데
+				하지만 내가 모든 것을 내던져버렸어요
+				엄마...
+				당신을 울리고 싶었던게 아니었는데
+				내가 내일 이 시간에 이곳으로 돌아오지 못하더라도
+				살아가세요 살아가세요
+				아무 일도 없었던 것처럼
+				너무 늦었어
+				내 차례가 와버렸는걸
+				등골이 오싹해
+				몸이 계속해서 아파와
+				안녕히, 모두들
+				난 가야만 해요
+				모든 것을 뒤로 하고
+				진실과 마주서야 해요
+				엄마...
+				죽고싶지 않아요
+				가끔 내가 태어나지 않았더라면 하고 바래요
+			</p>
+		</div>
+		<hr>
+		<div id="sellinfo">
+			<div id="selltext10">
+				<h3 id="sellh3">판매자 정보</h3>
+				<hr style="border: 1px solid pink">
+			</div>
+			<div id="sellinfoimg">
+				<a href="#">
+					<img src="resources/as.jpg" id="sellimg">
+				</a>
+				<p>*프로필 사진을 클릭하면 판매자 정보로 이동합니다.</p>
+			</div>
+			<div id="sellinfotext">
+				<ul id="sellinfotext2">
+					<li>스　토　어　명　:　기열이네</li><br>
+					<li>판　　매　　자　:　김기열</li><br>
+					<li>신　　뢰　　도　:　0</li><br>
+					<li>판　매　횟　수　:　0</li>
+				</ul>
+			</div>
+		</div>
+		<hr>
+		<div id="qnadiv">
+			<div id="productqna">
+				<h3 id="producth3">제품 문의</h3>
+				<hr style="border: 1px solid pink">
+			</div>			
+		</div>
+		<div id="sibaldiv">
+			<div id="anisibal">
+				<p>나문의</p>
+				<details>
+					<summary>답글</summary>
+					<input type="text" value="문의는 포도가 먹고시푼데" class="sustyle">
+					<button class="subtn">작성</button>
+				</details>
+				<hr>
+				<p>고구마 호박</p>
+				<details>
+					<summary>답글</summary>
+					<input type="text" value="어머니 호 박 고 구 마" class="sustyle">
+					<button class="subtn">작성</button>
+				</details>
+				<hr>
+				<p>자살하고 싶다</p>
+				<details>
+					<summary>답글</summary>
+					<input type="text" value="자살 방지 센터 1393" class="sustyle">
+					<button class="subtn">작성</button>
+				</details>
+				<hr>
+				<p>나는 나는 저팔계</p>
+				<details>
+					<summary>답글</summary>
+					<input type="text" value="왜 나를 괴롭히나" class="sustyle">
+					<button class="subtn">작성</button>
+				</details>
+				<hr>
+				<p>눈이 좋은 사슴은</p>
+				<details>
+					<summary>답글</summary>
+					<input type="text" value="굿 아이 디어 껄껄" class="sustyle">
+					<button class="subtn">작성</button>
+				</details>
+				<hr>
+				<div>
+			<div style="text-align: center;">
+			<ul class="pagination pagination-sm">
+				<li><a href="#" style="color: rgb(255, 158, 186)">◁</a></li>
+  				<li><a href="#" style="color: rgb(255, 158, 186)">1</a></li>
+  				<li><a href="#" style="color: rgb(255, 158, 186)">2</a></li>
+  				<li><a href="#" style="color: rgb(255, 158, 186)">3</a></li>
+  				<li><a href="#" style="color: rgb(255, 158, 186)">4</a></li>
+  				<li><a href="#" style="color: rgb(255, 158, 186)">5</a></li>
+  				<li><a href="#" style="color: rgb(255, 158, 186)">▷</a></li>
+			</ul>
+			</div>
+		</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+package com.icia.fontExample.Controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+public class MVCController {
+	@RequestMapping("/")
+	public String main(Model model) {
+		model.addAttribute("viewName", "test/main.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("viewName", "test/login.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/join")
+	public String join(Model model) {
+		model.addAttribute("viewName", "test/join.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/changePwd")
+	public String changePwd(Model model) {
+		model.addAttribute("viewName", "test/changePwd.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/withdrawal")
+	public String withdrawal(Model model) {
+		model.addAttribute("viewName", "test/withdrawal.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/myInfomation")
+	public String myInfomation(Model model) {
+		model.addAttribute("viewName", "test/myInfomation.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/findId")
+	public String findId(Model model) {
+		model.addAttribute("viewName", "test/findId.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/myReview")
+	public String myreview(Model model) {
+		model.addAttribute("viewName", "test/myReview.jsp");
+		return "main";
+	}
+
+	@GetMapping("/uploadProduct")
+	public String uploadProduct(Model model) {
+		model.addAttribute("viewName", "test/uploadProduct.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/sellManagement")
+	public String sellManagement(Model model) {
+		model.addAttribute("viewName", "test/sellManagement.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/blockManagement")
+	public String blockManagement(Model model) {
+		model.addAttribute("viewName", "test/blockManagement.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/membermanagement")
+	public String membermanagement(Model model) {
+		model.addAttribute("viewName", "test/membermanagement.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/sales")
+	public String sales(Model model) {
+		model.addAttribute("viewName", "test/sales.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/service_center_menu")
+	public String serviceCenterMenu(Model model) {
+		model.addAttribute("viewName", "test/service_center_menu.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/sellReviewReport")
+	public String sellReviewReport(Model model) {
+		model.addAttribute("viewName", "test/sellReviewReport.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/certification")
+	public String certification(Model model) {
+		return "test/certification";
+	}
+
+	@RequestMapping("/transaction")
+	public String transaction(Model model) {
+		model.addAttribute("viewName", "test/transaction.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/productListSquare")
+	public String productListSquare(Model model) {
+		model.addAttribute("viewName", "test/productListSquare.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/productListBar")
+	public String productListBar(Model model) {
+		model.addAttribute("viewName", "test/productListBar.jsp");
+		return "main";
+	}
+
+	@GetMapping("/readProduct")
+	public String readProduct(Model model) {
+		model.addAttribute("viewName", "test/readProduct.jsp");
+		return "main";
+	}
+
+	@GetMapping("/favorites")
+	public String favorites(Model model) {
+		model.addAttribute("viewName", "test/favorites.jsp");
+		return "main";
+	}
+
+	@GetMapping("/notLoginChangePwd")
+	public String notLoginChangePwd(Model model) {
+		model.addAttribute("viewName", "test/notLoginChangePwd.jsp");
+		return "main";
+	}
+
+	@GetMapping("/buy_history")
+	public String buy_history(Model model) {
+		model.addAttribute("viewName", "test/buy_history.jsp");
+		return "main";
+	}
+
+	@GetMapping("/sell_history")
+	public String sell_history(Model model) {
+		model.addAttribute("viewName", "test/sell_history.jsp");
+		return "main";
+	}
+
+	@GetMapping("/test")
+	public String test(Model model) {
+		model.addAttribute("viewName", "test/reviewfix1.jsp");
+		return "main";
+	}
+
+	@GetMapping("/cachecheck")
+	public String cachecheck(Model model) {
+		model.addAttribute("viewName", "test/cachecheck.jsp");
+		return "main";
+	}
+
+	@GetMapping("/purchaseokjsp")
+	public String purchaseokjsp(Model model) {
+		model.addAttribute("viewName", "test/purchaseokjsp.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/sellReviewPage")
+	public String sellReviewPage(Model model) {
+		model.addAttribute("viewName", "test/sellReviewPage.jsp");
+		return "main";
+	}
+
+	@GetMapping("/declaration")
+	public String declaration(Model model) {
+		model.addAttribute("viewName", "test/declaration.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/charge")
+	public String charge(Model model) {
+		model.addAttribute("viewName", "test/charge.jsp");
+		return "main";
+	}
+
+	@GetMapping("/chargeInfo")
+	public String chargeInfo(Model model) {
+		model.addAttribute("viewName", "test/chargeInfo.jsp");
+		return "main";
+	}
+
+	@GetMapping("/paysample")
+	public String paysample(Model model) {
+		model.addAttribute("viewName", "test/paymentsample.jsp");
+		return "main";
+	}
+
+	@GetMapping("/termsOfUse")
+	public String termsOfUse(Model model) {
+		return "test/termsOfUse";
+	}
+
+	@GetMapping("/privacyPolicy")
+	public String privacyPolicy(Model model) {
+		return "test/privacyPolicy";
+	}
+
+	@GetMapping("/business")
+	public String business(Model model) {
+		return "test/business";
+	}
+
+	@GetMapping("/serviceview")
+	public String serviceview(Model model) {
+		return "test/serviceview";
+	}
+
+	@GetMapping("/privacy")
+	public String privacy(Model model) {
+		return "test/privacy";
+	}
+
+	@GetMapping("/uniqueIdentification")
+	public String uniqueIdentification(Model model) {
+		return "test/uniqueIdentification";
+	}
+	@GetMapping("/newsAgency")
+	public String newsAgency(Model model) {
+		return "test/uniqueIdentification";
+	}
+}

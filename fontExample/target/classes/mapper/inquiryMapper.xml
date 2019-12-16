@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inquiryMapper">
+	<insert id="insert">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select inquiry_seq.nextval from dual <!--  하나씩 올라 가는 값 -->
+		</selectKey>
+		insert into inquiry(no, username, type_no, title, content, answer, process)
+		values(#{no}, #{username}, #{type_no}, #{title}, #{content}, #{answer}, 0)
+	</insert>
+	
+	<select id="inquiryByNo" resultType="inquiry">
+		select no, username, type_no, title, content, answer, process from inquiry
+		where no=#{no}
+	</select>
+	
+	<select id="findAll" resultType="inquiry">
+		select no,username,type_no,title,content,answer,process from inquiry
+		where username=#{username} 
+	</select>
+	
+		<select id="findCount" resultType="int">
+		select /*+ index_ffs(inquiry pk_inquiry) */ count(no) from inquiry
+	</select>
+	<select id="inquiryByMyPage" resultType="inquiry">
+	<!-- CDATA 문자 그대로 해석  -->
+	<![CDATA[ 
+		select * from(
+		select rownum as rnum, I.* from
+		(select /*+ index_desc(inquiry pk_inquiry)*/  no,username,type_no,title,content,answer,process from inquiry where username = #{username}) I
+		where rownum <=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	
+	<select id="inquiryByPage" resultType="inquiry">
+	<!-- CDATA 문자 그대로 해석  -->
+	<![CDATA[ 
+		select * from(
+		select rownum as rnum, I.* from
+		(select /*+ index_desc(inquiry pk_inquiry)*/  no,username,type_no,title,content,answer,process from inquiry) I
+		where rownum <=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	
+	<update id="answerInsert">
+		update inquiry set answer=#{answer}, process=1 where no=#{no}      
+	</update>
+	
+	<select id="answerFind" resultType="inquiry">
+		select no, username, type_no, title, content, answer, process from inquiry
+		where no=#{no}
+	</select>
+	
+	<delete id="delete">
+		delete from inquiry where no=#{no}
+	</delete>
+	</mapper>

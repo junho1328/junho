@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="declarationMapper">
+
+	<update id="declarationUpdate">
+		update declaration set declaration_count =declaration_count+1 where
+		declaration_reason=#{declaration_reason}
+	</update>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="no">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select declaration_seq.nextval from dual <!--  하나씩 올라 가는 값 -->
+		</selectKey> 
+		insert into declaration(no,username,declaration_username,reason_no,content,declaration_date) 
+		values(#{no},#{username},#{declaration_username},#{reason_no},#{content},sysdate)
+	</insert>
+	<select id="declarationView" resultType="declaration">
+		select no , username , declaration_username , reason_no , content , declaration_date from declaration
+	</select>
+	</mapper>

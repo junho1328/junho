@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#footer {
+	text-align: center;
+}
+
+#footer_menu {
+	display: inline-block;
+}
+
+</style>
+</head>
+<body>
+	<div id="footer" class="container-fluid">
+		<div id="footer_menu">
+			<a href="#">이용약관</a>&nbsp; &nbsp;&nbsp;&nbsp;
+			<a href="#">운영정책</a>&nbsp; &nbsp;&nbsp;&nbsp;
+			<a href="#">광고센터</a> &nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#">사업자정보확인</a> &nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#">개인정보처리방침</a>
+		</div>
+		<h5 class="white-text">copyright &copy; 2019 ICIA 4982</h5>
+	</div>
+</body>
+</html>

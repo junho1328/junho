@@ -1,0 +1,402 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<sec:authorize access="isAuthenticated()">                          <!--  로그인 했을 때 실행  -->
+   <sec:authentication property="principal.username" var="user" /> <!-- principal 로그인 되어 있는 정보  -->
+</sec:authorize>
+ <script>
+ 	 loginId = '${user}';
+ 	 var productno = location.search.substr(4);
+	 $(document).ready(function(){
+			var param = {
+					no : productno
+			}
+			$.ajax({
+				url: "/fontExample/api/product/find",
+				method: 'get',
+				data: param,
+				success : function(result) {
+					$("#productName").text(result.name);
+					$("#productImage").attr("src", result.image);
+					$("#productQuantity").text(result.quantity);
+					$("#productPrice").text(result.price);
+					$("#category").text(result.lno +""+ result.sno);
+					$("#deliveryPrice").text(2500);
+					findPoint();
+					findsellerbyNo();
+					productPayment(result.price);
+				}
+			})
+			
+			$("#paymentQuantity").on("blur", blurQuantity);
+			
+			$("#buyBtn").on("click", function(){
+				var quantity = $("#paymentQuantity").val();
+				var name = $("#name").val();
+				var postcode = $("#postcode1").val();
+				if(quantity == ""){
+					alert("구매수량 입력해주세요");
+					document.getElementById("paymentQuantity").focus();
+				}else if(postcode == ""){
+					alert("주소를 입력해주세요");
+					document.getElementById("postcode1").focus();
+				}else if(name == ""){
+					alert("이름을 입력해주세요");
+					document.getElementById("name").focus();
+				}else{
+					var finalPaymentAmount = parseInt($("#finalPaymentAmount").text());
+					var paramData = {
+							finalPayment : finalPaymentAmount
+					}
+					$.ajax({
+						url: "/fontExample/api/checkfinalPayment",
+						method: 'post',
+						data: paramData,
+						success : function(result) {
+							if(result == 1){
+								pointUp();
+							}else{
+								amount();
+							}
+						}
+					})
+				}
+			})
+			
+			$("#cancelBtn").on("click", function(){
+				history.back();				
+			})
+		})
+		
+		function pointUp(){
+		 	var finalPaymentAmount = parseInt($("#finalPaymentAmount").text());
+		 	location.href="/fontExample/charge?payment"+finalPaymentAmount;
+	 	}
+	 	function amount(){
+	 		var paramData = {
+	 				no : productno
+		 	}
+	 		$.ajax({
+				url: "/fontExample/api/purchase/insert",
+				method: 'post',
+				data: paramData,
+				success : function(result) {
+					findPurchaseNo();
+				}
+			})
+	 		
+	 	}
+	 	function findPurchaseNo(){
+	 		var paramData = {
+	 				no : productno
+		 	}
+	 		$.ajax({
+				url: "/fontExample/api/purchase/findPurchaseNo",
+				method: 'post',
+				data: paramData,
+				success : function(result) {
+					pointWaiting(result);
+				}
+			})
+	 		
+	 	}
+	 	
+	 	function findsellerbyNo(){
+	 		var param = {
+		 			no : productno
+		 		}
+		 		$.ajax({
+		 			url: "/fontExample/findsellerbyno",
+		 			method: 'get',
+		 			data : param,
+		 			async : false,
+		 			success : function(result) {
+		 				console.log(result);
+		 				$("#seller_username").text(result);
+		 			}
+		 		})
+	 	}
+	 	
+	 	
+	 	function pointWaiting(purchaseNo){
+	 		var delivertPrice = parseInt($("#deliveryPrice").text());
+	 		var productPayment = parseInt($("#productPayment").text());
+	 		var finalPaymentAmount = delivertPrice + productPayment;
+	 		var sellerUsername = $("#seller_username").text();
+	 		
+	 		var paramData = {
+	 				no : purchaseNo,
+	 				sellerUsername : sellerUsername,
+		 			point : finalPaymentAmount
+		 	}
+	 		$.ajax({
+				url: "/fontExample/api/purchase/pointwaiting",
+				method: 'post',
+				data: paramData,
+				success : function(result) {
+					location.href="/fontExample/purchaseok?no="+productno;
+				}
+			})
+	 	}
+	 	function blurQuantity(){
+	 		var price = $("#productPrice").text();
+	 		productPayment(price)
+	 	}
+	 	function findPoint(){
+	 		$.ajax({
+				url: "/fontExample/api/point",
+				method: 'get',
+				async : false,
+				success : function(result) {
+					$("#myPoint").text(result);
+				}
+			})
+	 	}
+	 	function productPayment(price){
+	 		var quantity = $("#paymentQuantity").val();
+	 		var maxQuantity = parseInt($("#productQuantity").text());
+	 		if(quantity == ""){
+	 			var productPayment = price * 1;
+		 		$("#productPayment").text(productPayment);
+		 		finalPaymentAmount(productPayment);	
+	 		}else if(quantity > maxQuantity){
+	 			alert("최대 수량은 " + maxQuantity +" 개 입니다");
+	 			document.getElementById("paymentQuantity").value="";
+	 			document.getElementById("paymentQuantity").focus();
+	 		}else{
+	 			var productPayment = price * quantity;
+		 		$("#productPayment").text(productPayment);
+		 		finalPaymentAmount(productPayment);
+	 		}
+	 	}
+	 	
+		function finalPaymentAmount(price){
+		 	var delivertPrice = parseInt($("#deliveryPrice").text());
+		 	var eventPrice = parseInt($("#eventPrice").text());
+		 	var myPoint = parseInt($("#myPoint").text());
+			
+			var payment = delivertPrice + price;
+			var mPayment = eventPrice + myPoint;
+			if(mPayment > payment){
+				$("#finalPaymentAmount").text(0);
+			}else{
+				var result = payment - mPayment;
+				$("#finalPaymentAmount").text(result);
+			}
+						
+	 	}
+	 	
+		function openDaumPostcode() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					var fullRoadAddr = data.roadAddress;
+					var extraRoadAddr = '';
+
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+					if (fullRoadAddr !== '') {
+						fullRoadAddr += extraRoadAddr;
+					}
+
+					document.getElementById('postcode1').value = data.zonecode;
+					document.getElementById('postcode2').value = fullRoadAddr;
+					document.getElementById("addr1").focus();
+				}
+			}).open();
+		}
+	 </script>
+<style>
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+#paymentMain{
+	margin-top: 30px;
+	width: 820px;
+	height: 1000px;
+}
+.subtitle{
+	box-sizing: border-box;
+    position: relative;
+    min-height: 30px;
+    margin-top: 15px;
+    padding: 11px 0 8px;
+    color: #2f2f2f;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+}
+#paymentTable{
+	table-layout: fixed;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-top: 2px solid #e1e1e1;
+    color: #1d1d1d;
+}
+
+#paymentTable tr td{
+	box-sizing: border-box;
+    position: relative;
+    padding: 7px 0 7px 10px;
+    border-bottom: 1px solid #e1e1e1;
+    text-align: left;
+}
+
+#paymentTable tr th{
+	box-sizing: border-box;
+    padding: 7px 0;
+    height: 40px;
+    border-bottom: 1px solid #e1e1e1;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+#paymentTitle{
+	position: relative;
+    padding-bottom: 3px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+.btnGroup{
+    margin: 45px 0;
+    text-align: center;
+}
+.paymentButton{
+	width: 137px;
+    height: 46px;
+}
+#buyBtn{
+	margin-right: 15px;
+}
+#paymentQuantity{
+	width: 210px;
+}
+</style>
+</head>
+<body>
+	<div id="paymentMain">
+		<div id="paymentTitle">
+			구매정보 확인
+		</div>
+		<div id="ProductInfo">
+			<div class="subtitle">물품정보</div>
+			<table id="paymentTable">
+				<tr>
+					<th>카테고리</th>
+					<td colspan="3" id="category">1 </td>
+				</tr>
+				<tr>	
+					<th>물품제목</th>
+					<td colspan="3" id="productName"> 1</td>
+				</tr>
+				<tr>	
+					<th>등록일시</th>
+					<td colspan="3" id="productDate"> 1</td>
+				</tr>
+				<tr>
+					<th>수량</th>
+					<td id="productQuantity"> 1</td>
+					<th>가격</th>
+					<td><span id="productPrice"></span><span>원</span></td>
+				</tr>
+				<tr>	
+					<th>구매수량</th>
+					<td colspan="3"><input  id="paymentQuantity" name="paymentQuantity" placeholder="구매할 수량을 입력해주세요"> 개</td>
+				</tr>
+				<tr>
+					<th>물품사진</th>
+					<td colspan="3"><img id="productImage"> </td>
+				</tr>
+			</table>
+		</div>
+		<div id="MyInfo">
+			<div class="subtitle">배송지 정보</div>
+			<table id="paymentTable">
+				<tr>
+					<th>이름</th>
+					<td colspan="3"><input id="name" name="name" placeholder="이름을 입력해주세요"></td>
+				</tr>
+				<tr>
+					<th>배송지</th>
+					<td colspan="3" id="username">
+						<li>
+							<label style="width: 100px">우편번호</label>
+							<br>
+							<input type="text" style="width: 160px" class="juso"id="postcode1" name="postcode1" placeholder="우편번호"> 
+							<input id="adrselectbtn" type="button" onclick="openDaumPostcode()"	value="우편번호 검색">
+						</li>
+						<br>
+						<li>
+							<label style="width: 100px">도로명 주소</label>
+							<br>
+							<input type="text" id="postcode2" name="postcode2" placeholder="도로명주소" style="width: 280px" class="juso">
+						</li>
+						<br>
+						<li>
+							<label style="width: 100px">상세 주소</label>
+							<br>
+							<input class="ssjuso" id="addr1" name="addr1" type="text" placeholder="상세 주소" style="width: 280px">
+						</li>
+						<br>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="amountInfo">
+			<div class="subtitle">결제정보</div>
+			<table id="paymentTable">
+				<tr>
+					<th>결제금액</th>
+					<td><span id="productPayment"></span><span>원</span></td>
+				</tr>
+				<tr>
+					<th>배송비</th>
+					<td><span id="deliveryPrice"></span><span>원</span></td>
+				</tr>
+				<tr>
+					<th>이벤트</th>
+					<td><span id="eventPrice">0</span><span>원</span></td>
+				</tr>
+				<tr>
+					<th>현재보유포인트</th>
+					<td ><span id="myPoint">0</span><span>원</span></td>
+				</tr>
+				<tr>
+					<th>최종결제금액</th>
+					<td><span id="finalPaymentAmount"></span><span>원</span></td>
+				</tr>
+			</table>
+		</div>
+		<input id="seller_username" name="seller_username" type="hidden">
+		<div class="btnGroup">
+			<button class="paymentButton" id="buyBtn">구매하기</button>
+			<button class="paymentButton" id="cancelBtn">취소하기</button>
+		</div>
+	</div>
+</body>
+</html>

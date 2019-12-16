@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="paymentMapper">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="no">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select payment_seq.nextval from dual
+		</selectKey>
+		insert into payment(no,username,imp_aid,payment_date,statue,amount,vbank_account,vbank_bank,vbank_name)
+		values (#{no},#{username},#{impAid},sysdate,#{statue},#{amount},#{vBankAccount},#{vBankBank},#{vBankName})
+	</insert>
+	<select id="findByPage" resultType="payment">
+	<![CDATA[
+		select * from
+		(
+		select rownum rnum, p.* from
+		(
+		select no,username,imp_aid impAid, payment_date paymentDate,statue,amount,vbank_account vBankAccount,vbank_bank vBankBank,vbank_name vBankName
+		from payment
+		) p 
+		where rownum<=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findByPageByusername" resultType="payment">
+	<![CDATA[
+		select * from
+		(
+		select rownum rnum, p.* from
+		(
+		select no,username,imp_aid impAid, payment_date paymentDate,statue,amount,vbank_account vBankAccount,vbank_bank vBankBank,vbank_name vBankName
+		from payment where username=#{username}
+		) p 
+		where rownum<=#{endRowNum}
+		)
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findImpByNo" resultType="string">
+		select imp_aid from payment
+		where no=#{no} and rownum=1
+	</select>
+	<select id="findStatueByNo" resultType="string">
+		select statue from payment
+		where no=#{no} and rownum=1
+	</select>
+	<select id="findUsernameByNo" resultType="string">
+		select username from payment
+		where no=#{no} and rownum=1
+	</select>
+	<select id="findAmountByNo" resultType="long">
+		select amount from payment
+		where no=#{no} and rownum=1
+	</select>
+	<select id="findCount" resultType="int">
+		select count(*) from payment
+	</select>
+	<select id="findCountByusername" resultType="int">
+		select count(*) from payment
+		where username=#{username}
+	</select>
+	<update id="updateStatue">
+		update payment set statue=#{statue}
+		where no=#{no} and rownum=1
+	</update>
+	<delete id="delete">
+		delete from payment where imp_aid=#{impAid} and rownum=1
+	</delete>
+</mapper>

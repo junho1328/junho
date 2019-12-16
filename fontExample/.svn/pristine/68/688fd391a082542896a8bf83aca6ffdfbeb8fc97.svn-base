@@ -1,0 +1,37 @@
+package com.icia.fontExample.Controller;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+
+import com.icia.fontExample.Service.*;
+import com.icia.fontExample.entity.*;
+
+@RestController
+public class Seller_ReviewController {
+
+	@Autowired
+	private Seller_ReviewService service;
+	
+	@PostMapping("/test/seller_review")
+	public ResponseEntity<?> list(Seller_Review seller_review) {
+		service.insert(seller_review);
+		return ResponseEntity.ok("리뷰 작성 완료!");
+		
+	}
+	@GetMapping("/seller_review")
+	public ResponseEntity<?> findAllSeller_Review(){
+		return ResponseEntity.ok(service.findAllSeller_Review());
+	}
+	
+	@GetMapping("/seller_review/{no}")
+	public ResponseEntity<?> findSeller_Review(@PathVariable long no){
+		return ResponseEntity.ok(service.findSeller_Review(no));
+	}
+	
+	@DeleteMapping("/seller_review")
+	public ResponseEntity<?> delete(long no){
+		service.delete(no);
+		return ResponseEntity.ok("");
+	}
+}

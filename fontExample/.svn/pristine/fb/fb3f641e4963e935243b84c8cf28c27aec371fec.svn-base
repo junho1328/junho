@@ -1,0 +1,66 @@
+package com.icia.fontExample.Controller;
+
+import java.io.*;
+import java.security.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.*;
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.icia.fontExample.Dto.*;
+import com.icia.fontExample.Service.*;
+
+@RequestMapping("/api")
+@CrossOrigin("*")
+@RestController
+public class PaymentRestController {
+	@Autowired
+	private PaymentService service;
+
+	@PostMapping("/payment/complete")
+	public ResponseEntity<?> paycomplete(String imp_uid,long amount,Principal principal) throws JsonParseException, JsonMappingException, IOException{
+		return ResponseEntity.ok(service.paymentCheck(imp_uid,amount,principal.getName()));
+	}
+	@PostMapping("/payment/check")
+	public ResponseEntity<?> paycheck(String imp_uid, String merchant_uid, String status){
+		return ResponseEntity.status(200).body(imp_uid+"/"+status);
+	}
+	@GetMapping("/payment")
+	public ResponseEntity<?> paymentByAdmin(@RequestParam(defaultValue = "1")int pageno,@RequestParam(defaultValue = "10")int pagesize){
+		return ResponseEntity.ok(service.findAllByPage(pageno, pagesize));
+	}
+	@GetMapping("/payment/user")
+	public ResponseEntity<?> paymentByUser(@RequestParam(defaultValue = "1")int pageno,@RequestParam(defaultValue = "10")int pagesize,Principal principal){
+		return ResponseEntity.ok(service.findAllByPageByUsername(pageno, pagesize, principal.getName()));
+	}
+	@PostMapping("/payment/cancel")
+	public ResponseEntity<?> paycancel(long no) throws JsonParseException, JsonMappingException, IOException{
+		return ResponseEntity.ok(service.paymentCancel(no));
+	}
+	@PutMapping("/point/up")
+	public ResponseEntity<?> increasePoint(Principal principal,@RequestParam long point){
+		service.increasePoint(principal.getName(), point);
+		return ResponseEntity.ok(service.findPointByUsername(principal.getName()));
+	}
+	@PutMapping("/point/down")
+	public ResponseEntity<?> decreasePoint(Principal principal,@RequestParam long point){
+		service.decreasePoint(principal.getName(), point);
+		return ResponseEntity.ok(service.findPointByUsername(principal.getName()));
+	}
+	@GetMapping("/point")
+	public ResponseEntity<?> findPointByUsername(Principal principal){
+		return ResponseEntity.ok(service.findPointByUsername(principal.getName()));
+	}
+	
+	@PostMapping("/point/waiting")
+	public ResponseEntity<?> waitingPoint(Principal principal,@RequestParam long no, @RequestParam long point,@RequestParam String sellerUsername){
+		return ResponseEntity.ok(service.waitingPoint(principal.getName(),no , point, sellerUsername));
+	}
+	@PostMapping(path="/checkfinalPayment", produces="text/plain;charset=utf-8")
+	public ResponseEntity<?> checkFinalPayment(Principal principal,@RequestParam String finalPayment){
+		return ResponseEntity.ok(service.checkFinalPayment(principal.getName(), finalPayment));
+	}
+}

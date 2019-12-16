@@ -1,0 +1,236 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+<script language="javascript">
+	//페이지 이동
+	function goPage(pageNum) {
+		document.form.currentPage.value = pageNum;
+		getAddr();
+	}
+	// json타입 페이지 처리 (주소정보 리스트 makeListJson(jsonStr); 다음에서 호출)
+	/* 
+	 *  json타입으로 페이지 처리시 수정 
+	 *  function pageMake(jsonStr){ 
+	 *  	var total = jsonStr.results.common.totalCount; // 총건수 
+	 */
+
+	// xml타입 페이지 처리 (주소정보 리스트 makeList(xmlData); 다음에서 호출) 
+	function pageMake(xmlStr) {
+		var total = $(xmlStr).find("totalCount").text(); // 총건수
+		var pageNum = document.form.currentPage.value;// 현재페이지
+		var paggingStr = "";
+		if (total < 1) {
+		} else {
+			var PAGEBLOCK = document.form.countPerPage.value;
+			var pageSize = document.form.countPerPage.value;
+			var totalPages = Math.floor((total - 1) / pageSize) + 1;
+			var firstPage = Math.floor((pageNum - 1) / PAGEBLOCK) * PAGEBLOCK
+					+ 1;
+			if (firstPage <= 0)
+				firstPage = 1;
+			var lastPage = firstPage - 1 + PAGEBLOCK;
+			if (lastPage > totalPages)
+				lastPage = totalPages;
+			var nextPage = lastPage + 1;
+			var prePage = firstPage - 5;
+			if (firstPage > PAGEBLOCK) {
+				paggingStr += "<a href='javascript:goPage(" + prePage
+						+ ");'>◁</a>  ";
+			}
+			for (i = firstPage; i <= lastPage; i++) {
+				if (pageNum == i)
+					paggingStr += "<a style='font-weight:bold;color:blue;font-size:15px;' href='javascript:goPage("
+							+ i + ");'>" + i + "</a>  ";
+				else
+					paggingStr += "<a href='javascript:goPage(" + i + ");'>"
+							+ i + "</a>  ";
+			}
+			if (lastPage < totalPages) {
+				paggingStr += "<a href='javascript:goPage(" + nextPage
+						+ ");'>▷</a>";
+			}
+			$("#pageApi").html(paggingStr);
+		}
+	}
+</script>
+<style>
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+
+h2{
+	text-align: center;
+}
+
+#main {
+	text-align: center;
+}
+
+ul{
+	text-align: center;
+}
+.left{
+	text-align: left;
+}
+#infotext{
+	width: 300px;
+}
+.textAll{
+	width: 280px;
+	height: 30px;
+}
+#select{
+	width: 280px;
+	height: 30px;
+}
+#textarea{
+	width: 200px;
+	border: 1px solid aliceblue;
+}
+button{
+	border-radius: 5px;
+	background-color: rgb(255, 182, 193);
+	color: white;
+	height: 30px;
+	font-weight: bold;
+	width: 80px;
+	border: none;
+}
+.juso{
+	height: 30px;
+}
+
+.ssjuso{
+	width: 98px;
+	height: 30px;
+}
+#inTel{
+	width: 115px;
+}
+</style>
+</head>
+<body>
+	<div id="main">
+		<h2>
+			<a href="#"><img src="resources/logo.png"  id="logo"></a>
+		</h2>
+		<div>
+			<h3>회원가입</h3>
+		</div>
+		<div id="infotext">
+			<ul>
+				<li class="left">
+					<label class="left">아이디</label><br>
+					<input type="text" value="아이디를 입력해주세요" class="textAll"><br>
+					<input type="hidden" value="아이디 중복 확인">
+				</li>
+				<br>
+				<li class="left">
+					<label class="left">비밀번호</label><br>
+					<input type="text" value="비밀번호를 입력해주세요" class="textAll"> <br>
+					<input type="hidden" value="비밀번호 일치 확인">
+				</li>
+				<br>
+				<li class="left">
+					<label>비밀번호 확인</label><br>
+					<input type="text" value="비밀번호 한 번 더 입력해주세요" class="textAll"> <br>
+					<input type="hidden" value="비밀번호 확인">
+				</li>
+				<br>
+				<li class="left">
+					<label>이름</label><br>
+					<input type="text" value="이름을 입력해주세요" class="textAll"> <br>
+				</li>
+				<br>
+				<li class="left">
+					<label>이메일</label><br>
+					<input type="text" value="이메일을 입력입력해주세요" class="textAll">
+				</li>
+				<br>
+				<li class="left">
+					<!-- 주소 api
+			<form name="form" id="form" method="post">
+				<table >
+					<colgroup>
+						<col style="width:20%"><col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>우편번호</th>
+							<td>
+					    		<input type="hidden" id="confmKey" name="confmKey" value=""  >
+								<input type="text" id="zipNo" name="zipNo" readonly style="width:100px">
+								<input type="button"  value="주소검색" onclick="goPopup();">
+							</td>
+						</tr>
+						<tr>
+							<th><label>도로명주소</label></th>
+							<td><input type="text" id="roadAddrPart1" ></td>
+						</tr>
+						<tr>
+							<th>상세주소</th>
+								<td>
+									<input type="text" id="addrDetail" style="width:40%" value="">
+									<input type="text" id="roadAddrPart2"  style="width:40%" value="">
+								</td>
+						</tr>
+					</tbody>
+				</table>
+		</form>
+		-->
+				</li>
+				<li class="left">
+					<label style="width:80px">우편번호</label><input type="text" style="width:105px" class="juso">　<button>주소 검색</button>		
+				</li>
+				<br>
+				<li class="left">
+					<label style="width:80px">도로명 주소</label><input type="text" style="width:200px" class="juso">
+				</li>
+				<br>
+				<li class="left">
+					<label style="width:80px">상세 주소</label><input class="ssjuso" type="text"> <input class="ssjuso" type="text">
+				</li>
+				<br>
+				<li class="left">
+				<label>휴대전화</label><br>
+					<select id="select">
+						<option>대한민국 +82</option>
+						<option>일본 +81</option>
+						<option>미국, 캐나다 +1</option>
+						<option>중국 +86</option>
+					</select><br>
+				</li>
+				<li class="left">
+					<input type="text" value="본인인증" style="width:160px" class="juso">
+					<a	href="#"><button id="inTel">인증번호 받기</button></a>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div id="textarea">
+			<ul>
+				<li >
+					<label>약관</label>
+				</li>
+				<li>(필수) 4982 이용 약관 동의 <input type="checkbox"></li>
+				<li>(필수) 개인정보 활용 동의 <input type="checkbox"></li>
+			</ul>
+		</div>
+		<br>
+		<div>
+			<a href="#"><button>회원가입</button></a>
+		</div>
+		<br>
+		<br>
+	</div>
+</body>
+</html>

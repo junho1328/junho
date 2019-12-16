@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="certificationMapper">
+	<insert id="certification_insert">
+		insert into certification(username, tel_certification, email_certification) values(#{username}, 0, 0)
+	</insert>
+	
+	<select id="certification_find" resultType="certification">
+		select tel_certification, email_certification from certification where username = #{username} 
+	</select>
+	
+	<update id="email_certification">
+		update certification set email_certification= 1 where username=#{username}
+	</update>
+	
+	<update id="tel_certification">
+		update certification set tel_certification= 1 where username=#{username}
+	</update>
+</mapper>
+
+
+
+

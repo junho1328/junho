@@ -1,0 +1,36 @@
+package com.icia.fontExample.Controller;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+
+import com.icia.fontExample.Service.*;
+import com.icia.fontExample.entity.*;
+
+@RestController
+public class ProductController {
+	@Autowired
+	private ProductService service;
+
+	@PostMapping("/test/product")
+	public ResponseEntity<?> list(Product product) {
+		service.insert(product);
+		return ResponseEntity.ok("제품 등록 완료!");
+	}
+	
+	@GetMapping("/product")
+	public ResponseEntity<?> findAllProduct(){
+		return ResponseEntity.ok(service.findAllProduct());
+	}
+	
+	@GetMapping("/product/{no}")
+	public ResponseEntity<?> findProduct(@PathVariable long no){
+		return ResponseEntity.ok(service.findProduct(no));
+	}
+	
+	@DeleteMapping("/product")
+	public ResponseEntity<?> delete(long no){
+		service.delete(no);
+		return ResponseEntity.ok("삭제 완료!");
+	}
+}

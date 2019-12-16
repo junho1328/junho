@@ -1,0 +1,69 @@
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+	color: black;
+}
+
+a {
+	text-decoration: none;
+}
+
+.header_wrapper {
+	float: right;
+	maring: 0 auto;
+	display: block;
+}
+
+.clearfix {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.header {
+	height: 30px;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+}
+
+.menu {
+	float: right;
+}
+
+.menu li {
+	float: left;
+}
+
+.menu a {
+	line-height: 30px;
+	color: black;
+	font-size: 10px;
+	padding: 0 15px;
+}
+</style>
+</head>
+<body>
+	<div class="header">
+		<div class="header_wrapper">
+			<ul class="menu">
+				<li><a href="/fontExample/join">회원가입</a></li>
+				<li><a href="/fontExample/login">로그인</a></li>
+				<li><a href="/fontExample/service_center_menu">공지사항</a></li>
+				<li><a href="/fontExample/service_center_menu">고객센터</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

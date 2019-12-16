@@ -1,0 +1,84 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>신고하기</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+
+        #Declaration_menu {
+            width: 635px;
+            height: 45px;
+        }
+
+        #Declaration_Reason {
+            width: 635px;
+            height: 100px;
+        }
+
+        #Declaration_button {
+            width: 635px;
+            height: 45px;
+            background-color: #3498DB;
+            color: white;
+        }
+
+        #Declaration_div {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2><a href="#"><img src="resources/logo.png"></a></h2>
+    <div id="Declaration_div">
+        <br>
+        <br>
+        <h2>신고하기</h2>
+    </div>
+    <div>
+        <form action="">
+        <tr>
+
+        </tr>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <td>
+                    <select id="Declaration_menu">
+                        <option name="Declaration_Advertising" value="Declaration_Advertising">광고(상점홍보,낚시글,도배글)</option>
+                        <option name="Declaration_Inaccuracy" value="Declaration_Inaccuracy">물품정보 부정확</option>
+                        <option name="Declaration_Prohibition" value="Declaration_Prohibition">거래 금지 품목</option>
+                        <option name="Declaration_Violence" value="Declaration_Violence">언어폭력</option>
+                        <option name="Declaration_Other" value="Declaration_Other">기타사유</option>
+                    </select>
+                </td>
+            </tr>
+       			
+            <tr>
+                <td>
+                   <br><input id="Declaration_Reason" type="text" name="Withdrawal_pass" placeholder=" 신고사유을 적어주세요.">
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                 <br><button id="Declaration_button" type="submit">신고</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>

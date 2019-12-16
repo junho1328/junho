@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SalesRightsMapper">
+<insert id="insertSales">
+	insert into seller (username,name,count,tel,sns,amount,account)
+	values (#{username},#{name},0,#{tel},#{sns},0,#{account})
+</insert>
+
+</mapper>

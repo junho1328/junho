@@ -1,0 +1,396 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<style>
+#main_Page {
+	margin-bottom: 100px;
+}
+
+#main_Category {
+	width: 225px;
+	height: 500px;
+	text-align: left;
+	float: left;
+	display: inline-block;
+	color: black;
+}
+#main_Category li {
+	line-height:50px;
+}
+#main_Category li a {
+	display: block;
+	height: 50px;
+	color: black;
+	font-size: 15px;
+	font-style: normal;
+	margin: 0px;
+	padding: 0px 10px 0px 15px;
+	text-align: left;
+	font-size: 15px;
+   	background-color:#DDDDDD;
+	border-bottom:1px solid #FFF;
+	border-top:1px solid #FFF;
+	border-right:1px solid #FFF;
+}
+
+#main_Category li a:hover, .menubar ul li:hover a {
+	text-decoration: none;
+}
+
+#main_product {
+	margin-top: 10px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#wholeBox {
+	overflow: hidden;
+	margin: auto;
+	border-collapse: collapse;
+	width: 900px;
+	text-align: left;
+}
+
+#tagA {
+	overflow: hidden;
+	padding-left: 100px;
+	text-align: center;
+}
+
+#sellArticleOuter {
+	height: 46px;
+	padding-top: 20px;
+}
+
+#tagP {
+	width: 100px;
+	float: left;
+}
+
+#largeCate {
+	width: 150px;
+	float: left;
+}
+
+#smallCate {
+	width: 490px;
+	float: left;
+	padding-top: 10px;
+}
+
+.ulLi {
+	display: inline-block;
+	padding-right: 30px;
+	width: 140px;
+}
+
+#sellArticle {
+	width : 100%;
+	font-size: 30px;
+	padding-right : 760px;
+}
+
+.productSajin {
+	width: 150px;
+	height: 150px;
+	position: relative;
+	left: 9px;
+}
+
+.innerBox {
+	display: inline-block;
+	border-collapse: collapse;
+	width: 200px;
+	height: 280px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 15px;
+}
+
+#wholeSellArticle {
+	padding-top: 10px;
+}
+
+.productDetail {
+	width: 200px;
+	display: inline-block;
+	padding-left: 10px;
+}
+
+.productTitle {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.productPrice {
+	font-size: 12px;
+}
+
+.productDate {
+	padding-top: 5px;
+	font-size: 12px;
+}
+
+.productState {
+	padding-top: 8px;
+	font-weight: bold;
+}
+
+.productUl:first-child {
+	border-top: 1px solid white;
+}
+
+/* .productUl { */
+/* 	border-top: 1px solid lightgrey; */
+/* } */
+
+#tagP2 {
+	padding-left: 15px;
+	padding-top: 10px;
+	font-weight: bold;
+}
+
+.largeDiv {
+	padding-left: 15px;
+	padding-top: 10px;
+}
+
+#bottomPaging {
+	width: 100%;
+	text-align: center;
+	height: 100px;
+	border-top: 2px solid black;
+}
+
+#pagination {
+	margin: 0;
+	left: 1087px;
+	margin-top: 35px;
+}
+
+#changeBoard {
+	position: relative;
+	bottom: 40px;
+	left: 780px;
+	width: 120px;
+	display: inline-block;
+}
+
+/* 찬주스 스타일 */
+
+  #pSqumain {
+      overflow: hidden;
+      margin: auto;
+      border-collapse: collapse;
+      width: 900px;
+      text-align : left;
+  }
+  #tagA {
+      overflow: hidden;
+      padding-left : 100px;
+      text-align : center;
+  }
+  #tagP {
+      width: 100px;
+      float: left;
+  }
+
+  #largeCate {
+      width: 150px;
+      float: left;
+  }
+
+  #smallCate {
+      width: 490px;
+      float: left;
+      padding-top: 10px;
+  }
+
+  .ulLi {
+      display: inline-block;
+      padding-right: 30px;
+      width: 140px;
+  }
+  .innerBox {
+      display: inline-block;
+      border-collapse: collapse;
+      width: 200px;
+      height: 280px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 15px;
+  }
+
+  #wholeSellArticle {
+      padding-top: 10px;
+  }
+
+  .productDetail {
+      width: 200px;
+      display: inline-block;
+      padding-left: 10px;
+  }
+  .productUl {
+  	display: inline-block;
+  }
+  .productTitle {
+      font-weight: bold;
+      font-size: 14px;
+  }
+
+  .productPrice {
+      font-size: 12px;
+  }
+
+  .productDate {
+      padding-top: 5px;
+      font-size: 12px;
+  }
+
+  .productState {
+      padding-top: 8px;
+      font-weight: bold;
+  }
+  #tagP2 {
+      padding-left : 15px;
+      padding-top : 10px;
+      font-weight: bold;
+  }
+  .largeDiv {
+      padding-left : 15px;
+      padding-top : 10px;
+  }
+  #bottomPaging {
+   width: 100%;
+   text-align: center;
+   height: 100px;
+   border-top: 2px solid black;
+}
+ #pagination {
+   margin: 0;
+   left: 1087px;
+   margin-top: 35px;
+}
+  #changeBoard {
+      position: relative;
+      bottom : 40px;
+      left : 840px;
+      display: inline-block;
+  }
+
+.slide{
+	width:973px;
+	height:535px;
+	overflow:hidden;
+	position:relative;
+}
+
+.bx-wrapper {
+	border:0;
+}
+</style>
+<script>
+// 상품목록 출력
+function printList(pdt) {
+	var $body = $("#wholeSellArticle");
+	$.each(pdt, function(idx, pros) {
+		var $productUl = $("<ul>").attr("class","productUl").appendTo($body);
+		var $innerBox = $("<li>").attr("class","innerBox").appendTo($productUl);
+		var $productSajin = $("<img>").click(function() {
+			location.href="/fontExample/readProduct?pageno="+pros.no;
+		}).attr("src", pros.image).css("cursor","pointer").attr("class", "productSajin").appendTo($innerBox);
+		var $productDetail = $("<div>").attr("class", "productDetail").appendTo($innerBox);
+		$("<a>").attr("href", "/fontExample/readProduct?pageno=" +pros.no).text(pros.name).attr("class", "productTitle").appendTo($productDetail);
+		$("<div>").text(pros.price).attr("class", "productPrice").appendTo($productDetail);
+		$("<div>").text(pros.sell_date).attr("class", "productDate").appendTo($productDetail);
+		if(pros.state==1) {
+			$("<div>").text("거래완료").attr("class","productState").appendTo($productDetail);
+		} else if(pros.state==0) {
+			$("<div>").text("거래중").attr("class","productState").appendTo($productDetail);
+		}
+	});
+}
+
+function printLargeCate1(largeCate1) {
+	$main_Category = $("#main_Category");
+	$ul = $("<ul>").appendTo($main_Category);
+	$.each(largeCate1, function(idx, cate) {
+		$li = $("<li>").appendTo($ul);
+		$("<a>").text(cate.name).attr("href","http://localhost:8081/fontExample/productList?category="+cate.no).appendTo($li);
+	})
+}
+
+
+
+$(function() {
+	// 페이지 불러오는 ajax
+	$.ajax({
+		url: "/fontExample/api/productListsWithoutPage",
+		method: "get",
+		data : location.search.substr(1),
+		success: function(result) {
+			printList(result);
+		}
+	});
+	
+	// large_category 불러오는 ajax
+	$.ajax({
+		url: "/fontExample/api/categories/large",
+		method:"get",
+		success: function(result) {
+			printLargeCate1(result);
+		}
+	})
+});
+
+$(document).ready(function () {
+    $('.bxslider').bxSlider({
+        auto: true, // 자동으로 애니메이션 시작
+        speed: 500,  // 애니메이션 속도
+        pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
+        mode: 'horizontal', // 슬라이드 모드 ('fade', 'horizontal', 'vertical' 이 있음)
+        pager: true, // 페이지 표시 보여짐
+    });
+});
+
+</script>
+</head>
+<body>
+	<div id="main_Page">
+		<div id="main_Category">
+		</div>
+			<div class="slide">
+				<ul class="bxslider">
+			    	<li><a href="#"><img src="resources/mainAD1.jpg" alt="" title="이미지1"></a></li>
+			    	<li><a href="#"><img src="resources/mainAD2.jpg" alt="" title="이미지2"></a></li>
+			    	<li><a href="#"><img src="resources/mainAD3.jpg" alt="" title="이미지3"></a></li>
+			    	<li><a href="#"><img src="resources/mainAD4.jpg" alt="" title="이미지4"></a></li>
+				</ul>
+			</div>
+			<div id="main_product">
+	        <div id="sellArticleOuter">
+	            <div id="sellArticle">
+	            	최근 올라온 판매글
+	            </div>
+	        </div>
+			<div id="wholeSellArticle">
+	        </div>
+		</div>
+	</div>
+</body>
+</html>

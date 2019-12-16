@@ -1,0 +1,37 @@
+package com.icia.fontExample.Controller;
+
+import org.apache.ibatis.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.icia.fontExample.Service.exchangeService;
+import com.icia.fontExample.entity.Exchange;
+
+@RestController
+public class exchangeController {
+	@Autowired
+	private exchangeService service;
+	
+	@PostMapping("/exchange")
+	public ResponseEntity<?> insert(Exchange exchange){
+		service.insert(exchange);
+		return ResponseEntity.ok("등록이 완료되었습니다.");
+	}
+	
+	@GetMapping("/exchange")
+	public ResponseEntity<?> findAll(){
+		return ResponseEntity.ok(service.findAll());
+	}
+	
+	@GetMapping("/exchange/{username}")
+	public ResponseEntity<?> findByUsername(@PathVariable String username){
+		return ResponseEntity.ok(service.findByUsername(username));
+	}
+	
+	@DeleteMapping("/exchange")
+	public ResponseEntity<?> delete(long no){
+		service.delete(no);
+		return ResponseEntity.ok("삭제가 완료되었습니다");
+	}
+}

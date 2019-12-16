@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style>
+
+
+.li_a {
+	font-weight: bold;
+	font-size: 15px;
+	margin: 5px;
+	text-align: left;
+}
+
+.li_a a {
+	color: black;
+}
+
+#b {
+	float: left;
+	height: 200px;
+	width: 20%;
+}
+
+
+#information_menu {
+	font-family: THE행복열매;
+	font-weight: bolder;
+	text-align: left;
+	font-size: 40px;
+}
+
+#da {
+	border: 1px solid black;
+	text-align: left;
+	width: 70%;
+	margin: 5px;
+}
+</style>
+</head>
+<body>
+	<div id="b">
+			<div id="information_menu">내 정보</div>
+			<div id="da"></div>
+			<ul>
+				<li class="li_a"><a href="/fontExample/myInfomation">★ 내 정보
+						변경</a></li>
+				<li class="li_a"><a href="/fontExample/salesRights">★ 판매권한 등록</a></li>		
+				<li class="li_a"><a href="/fontExample/changePwd">★ 비밀번호 변경</a></li>
+				<li class="li_a"><a href="/fontExample/exchangepage">★ 포인트 정보</a></li>
+				<li class="li_a"><a href="/fontExample/favorites">★ 즐겨찾기</a></li>
+				<li class="li_a"><a href="/fontExample/uploadProduct">★ 판매등록</a></li>
+				<li class="li_a"><a href="/fontExample/buy_history">★ 구매내역</a></li>
+				<li class="li_a"><a href="/fontExample/sell_history">★ 판매내역</a></li>
+				<li class="li_a"><a href="/fontExample/myReview">★ 내가 쓴 리뷰</a></li>
+				<li class="li_a"><a href="/fontExample/service_center_menu">★ 문의 조회</a></li>
+				<li class="li_a"><a href="/fontExample/withdrawal" id="withdrawal_button">★ 회원탈퇴</a></li>
+			</ul>
+		</div>
+</body>
+</html>

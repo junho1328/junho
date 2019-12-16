@@ -1,0 +1,32 @@
+package com.icia.fontExample.Dao;
+
+import java.util.*;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.entity.*;
+
+@Repository
+public class Seller_ReviewDao {
+	
+	@Autowired
+	private SqlSessionTemplate tpl;
+	public int insert(Seller_Review seller_review) {
+		return tpl.insert("seller_reviewMapper.insert", seller_review);
+	}
+	
+	public List<Seller_Review> findAllSeller_Review() {
+		return tpl.selectOne("seller_reviewMapper.findAllSeller_Review");
+	}
+
+	public List<Seller_Review> findSeller_Review(long no) {
+		return tpl.selectOne("seller_reviewMapper.findSeller_Review",no);
+	}
+	
+	public int delete(long no) {
+		return tpl.delete("seller_reviewMapper.delete", no);
+	}
+
+}

@@ -1,0 +1,34 @@
+#### project uri ####
+spring.baseUri = http://localhost:8081/fontExample
+
+#### Oracle DB Info ####
+spring.datasource.driver-class-name=net.sf.log4jdbc.DriverSpy
+spring.datasource.url=jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl
+spring.datasource.username=test
+spring.datasource.password=1234
+
+#### email & password ####
+spring.mail.username=test
+spring.mail.password=1234
+
+
+#### file upload path ####
+upload.ckeditor.image =d:/upload/ckupload
+upload.profile.folder=d:/upload/profile
+
+### file download URI ##
+download.ckeditor.uri=http://localhost:8081/ckupload/
+download.profile.uri=http://localhost:8081/profile/
+
+#### level management ####
+login.cnt.silver=100
+write.cnt.silver=50
+login.cnt.gold=400
+write.cnt.gold=200
+
+
+#### board management ####
+board.hit = 10
+
+#### system ####
+block.board.cnt=5

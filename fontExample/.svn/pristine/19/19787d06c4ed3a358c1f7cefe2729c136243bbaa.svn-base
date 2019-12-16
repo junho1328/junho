@@ -1,0 +1,21 @@
+package com.icia.fontExample.Service;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.Dao.*;
+
+@Service
+public class JoinService {
+	@Autowired
+	private JoinDao dao;
+
+	public void checkId(String username) {
+		dao.checkId(username);
+	}
+
+	public void checkEmail(String email) {
+		dao.checkEmail(email);
+	}
+
+}

@@ -1,0 +1,150 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style>
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+
+#c {
+	float: right;
+	width: 80%;
+	height: 100%
+}
+
+#e {
+	font-family: THE행복열매;
+	font-weight: bolder;
+	text-align: left;
+	font-size: 40px;
+}
+
+#ea {
+	border: 1px solid black;
+	text-align: right;
+	width: 100%;
+	margin: 5px;
+}
+
+a {
+	color: black;
+}
+
+td {
+	padding: 5px;
+}
+
+#expage {
+	font-size: 20px;
+}
+
+#warning {
+	font-size: 30px;
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+}
+
+#exchangebutton {
+	font-family: THE행복열매;
+	font-weight: bolder;
+	border: 1px solid #D1B2FF;
+	border-radius: 5px;
+	background-color: #D1B2FF;
+	font-size: 30px;
+	padding: 5px;
+	margin: 10px;
+}
+</style>
+<script>
+/*
+$(function({
+function exchange (){
+		var exChangeData = new ExchangeData("exchangeForm");
+		console.log("exchangejsp" + exChangeData);
+		}
+			$ajax({
+				url: "/fontExample/api/exchange",
+				method: "post",
+				date: exChangeData,
+				success: function(){
+					location.href = response.getResponseHeader('location');
+				}
+			})
+	})
+*/
+$(function(){
+	$("#exchangebutton").on("click",function(){
+		var param = {
+				name : $("#name").val(),
+				amount : $("#amount").val(),
+				bank : $("#bank").val(),
+				account : $("#account").val()
+		}
+		$.ajax({
+			url:"/fontExample/api/exchange",
+			method: "post",
+			data:param,
+ 			success:function(){
+ 				console.log("성공")
+ 			}
+		})
+	})
+})
+</script>
+</head>
+<body>
+	<div>
+		<div>
+			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
+		</div>
+
+		<div id="c">
+			<div id="e">판매자 환전정보 입력</div>
+			<div id="ea"></div>
+			<div id="warning">
+				환전 시 유의사항<br> <br> 1. 환전신청시 이름과 계좌번호와 금액을 다시한번 확인해주세요.<br>
+				2. 환전신청 후 통장입금은 매주 목요일에 이루어집니다.<br> 3. 목요일의 환전은 다음주 목요일에
+				이루어집니다.<br> 4. 이외 문의사항은 사이트 문의에 남겨주세요.<br>
+				<table id="exchangeForm">
+					<tr>
+						<td>이름</td>
+						<td><input type="text" id="name"></td>
+					</tr>
+					<tr>
+						<td>환전은행</td>
+						<td><select id="bank">
+								<option>신한</option>
+								<option>국민</option>
+								<option>기업</option>
+								<option>농협</option>
+								<option>새마을</option>
+								<option>신협</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td>환전계좌</td>
+						<td><input type="text" id="account"></td>
+					</tr>
+					<tr>
+						<td>환전금액</td>
+						<td><input type="text" id="amount"></td>
+					</tr>
+				</table>
+				<button id="exchangebutton" type="button">환전하기</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

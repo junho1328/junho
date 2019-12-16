@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productListMapper">
+	<select id="findCount" resultType="int">
+		select /*+ index_ffs(sell
+		sell_pk_no) */ count(no) from product
+	</select>
+	<select id="findCountByLno" resultType="int">
+		select /*+ index_ffs(sell
+		sell_pk_no) */ count(no) from product
+		where lno=#{lno}
+	</select>
+	<select id="findCountBySno" resultType="int">
+		select /*+ index_ffs(sell
+		sell_pk_no) */ count(no) from product
+		where sno=#{sno}
+	</select>
+	<select id="findCountByProName" resultType="int">
+		select /*+ index_ffs(sell sell_pk_no) */ count(p.no) 
+		from product p, sell s
+		where p.name like '%'||#{pname}||'%' and p.no=s.product_no
+	</select>
+	<select id="findAllByPageNo" resultType="Sell">
+		<![CDATA[
+			select * from
+		       	(select rownum as rnum, b.* from 
+		       		(select s.no no, c.no sno, s.product_no product_no, s.username username, s.area area, s.infomation infomation, s.image image, s.sell_date sell_date, s.block block, p.price price, p.state state, p.quantity quantity, p.name name from product p, sell s, small_category c where s.product_no=p.no and p.sno=c.no) b
+		       	where rownum<=#{endRowNum}) 
+		    where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findPageByLno" resultType="Sell">
+		<![CDATA[
+			select * from
+		       	(select rownum as rnum, b.* from 
+		       		(select s.no no, c.no sno, s.product_no product_no, s.username username, s.area area, s.infomation infomation, s.image image, s.sell_date sell_date, s.block block, p.price price, p.state state, p.quantity quantity, p.name name from product p, sell s, small_category c 
+		       		where s.product_no=p.no and p.sno=c.no and p.lno=#{lno}) b
+		       	where rownum<=#{endRowNum}) 
+		    where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findPageBySno" resultType="Sell">
+		<![CDATA[
+			select * from
+		       	(select rownum as rnum, b.* from 
+		       		(select s.no no, c.no sno, s.product_no product_no, s.username username, s.area area, s.infomation infomation, s.image image, s.sell_date sell_date, s.block block, p.price price, p.state state, p.quantity quantity, p.name name from product p, sell s, small_category c 
+		       		where s.product_no=p.no and p.sno=c.no and p.sno=#{sno}) b
+		       	where rownum<=#{endRowNum}) 
+		    where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findPageByProName" resultType="Sell">
+		<![CDATA[
+			select * from
+		       	(select rownum as rnum, b.* from 
+		       		(select s.no no, c.no sno, s.product_no product_no, s.username username, s.area area, s.infomation infomation, s.image image, s.sell_date sell_date, s.block block, p.price price, p.state state, p.quantity quantity, p.name name from product p, sell s, small_category c 
+		       		where s.product_no=p.no and p.sno=c.no and p.name like '%'||#{pname}||'%') b
+		       	where rownum<=#{endRowNum}) 
+		    where rnum>=#{startRowNum}
+		]]>
+	</select>
+	<select id="findAll" resultType="Product">
+		select no, lno, sno, name,
+		price, image, quantity, state, product_date from product order by no
+		desc
+	</select>
+</mapper>

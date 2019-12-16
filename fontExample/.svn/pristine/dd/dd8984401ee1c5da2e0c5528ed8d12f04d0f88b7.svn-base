@@ -1,0 +1,26 @@
+package com.icia.fontExample;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+public class MVCController {
+	@RequestMapping("/")
+	public String main(Model model) {
+		model.addAttribute("viewName", "test/test.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("viewName", "test/login.jsp");
+		return "main";
+	}
+
+	@RequestMapping("/join")
+	public String join(Model model) {
+		model.addAttribute("viewName", "test/join.jsp");
+		return "main";
+	}
+}

@@ -1,0 +1,255 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="/fontExample/ckeditor/ckeditor.js"></script>
+<style>
+#MB_Above {
+	height: 320px;
+	padding: 10px;
+}
+
+#MB_Below {
+	height: 900px;
+	padding: 10px;
+	margin: 10px;
+}
+
+#R_img {
+	width: 250px;
+	height: 200px;
+	padding: 10px;
+}
+
+.MB_Id {
+	font-size: 30px;
+}
+
+.MB_Trust {
+	font-size: 30px;
+	color: blue;
+}
+
+#MB_One {
+	width: 30%;
+	height: 300px;
+	background: #D1B2FF;
+	float: left;
+}
+
+#MB_Two {
+	padding-left: 10px;
+	padding-top: 10px;
+	height: 300px;
+	float: right;
+	width: 70%;
+}
+
+.MB_Visit {
+	font-size: 15px;
+	width: 40%;
+	float: left;
+	text-align: left;
+}
+
+.Sell_Cnt {
+	font-size: 15px;
+	text-align: left;
+	width: 40%;
+	float: left;
+}
+
+.Report {
+	font-size: 20px;
+	width: 20%;
+	color: red;
+	float: right;
+	text-align: right;
+	font-weight: bolder;
+}
+
+#Two_a {
+	height: 30%;
+}
+
+#Two_b {
+	padding: 10px;
+	text-align: left;
+	height: 70%;
+	background: #D5D5D5;
+	font-size: 15px;
+}
+
+.MB_Visit, .Sell_Cnt {
+	font-size: 23px;
+	font-weight: bold;
+}
+
+#report {
+	width: 50px;
+	height: 30px;
+}
+
+.Review_Pr {
+	font-weight: bolder;
+	font-size: 23px;
+}
+
+.Review_SellMb, .Review_Mb, .Product_Name, .Imgupload {
+	font-size: 20px;
+	text-align: left;
+	padding-left: 30px;
+}
+
+.Imgupload {
+	
+}
+
+#Img1, #Img2, #Img3 {
+	margin: 10px;
+	width: 200px;
+	height: 200px;
+}
+
+#Review_Text, #Review_Trust {
+	font-size: 20px;
+}
+
+.trust {
+	padding: 5px;
+}
+
+#end {
+	font-weight: bolder;
+	border: 1px solid #D1B2FF;
+	border-radius: 5px;
+	background-color: #D1B2FF;
+	font-size: 30px;
+	padding: 5px;
+}
+
+#d {
+	font-weight: bolder;
+	text-align: left;
+	font-size: 40px;
+}
+
+#da {
+	border: 1px solid black;
+	text-align: left;
+	width: 70%;
+	margin: 5px;
+}
+
+#b {
+	float: left;
+	height: 900px;
+	width: 20%;
+}
+
+.li_a {
+	font-weight: bold;
+	font-size: 15px;
+	margin: 5px;
+	text-align: left;
+}
+
+	#leftfloat{
+		float: left;
+		width: 50%;
+		padding: 15px;
+		height: 80%;
+		background-color: rgb(255, 241, 242);
+	}
+</style>
+</head>
+<body>
+
+	<div id="MB_Above">
+<!-- 		<div id="b">
+			<div id="d">내 정보</div>
+			<div id="da"></div>
+			<ul>
+				<li class="li_a">★ 내 정보 변경</li>
+				<li class="li_a">★ 비밀번호 변경</li>
+				<li class="li_a">★ 즐겨찾기</li>
+				<li class="li_a">★ 구매내역</li>
+				<li class="li_a">★ 판매내역</li>
+				<li class="li_a">★ 내가 쓴 리뷰</li>
+				<li class="li_a">★ 문의 조회</li>
+			</ul>
+		</div> -->
+		<div id="MB_One">
+			<div>
+				<img id="R_img" src="resources/Music.jpg"> <br>
+				<p class="MB_Id">스토어 명</p>
+				<p class="MB_Trust">신뢰도 &nbsp; : &nbsp;&nbsp; 900</p>
+			</div>
+		</div>
+		<div id="MB_Two">
+			<div id="Two_a">
+				<br>
+				<p class="MB_Visit">방문자 수 :</p>
+				<p class="Sell_Cnt">판매 횟수 :</p>
+				<p class="Report"><a href="/fontExample/declaration" style="color: red;">신고하기</a></p>
+			</div>
+			<div id="Two_b">
+				판매자 정보 <br> <br> 주소 &nbsp; : &nbsp;&nbsp; <br> <br>
+				전화번호 &nbsp; : &nbsp;&nbsp; <br> <br> 카톡 아이디 &nbsp; :
+				&nbsp;&nbsp; <br> <br> 판매하는 물품들의 내용 &nbsp; : &nbsp;&nbsp;
+				<br> <br>
+			</div>
+		</div>
+	</div>
+	<div id="MB_Below">
+		<p class="Review_Pr">리뷰 작성</p>
+		<p class="Product_Name">제품명 &nbsp; : &nbsp;&nbsp; 분필</p>
+		<div id="leftfloat">
+		<label> ☆ 이미지 업로드시 유의사항 ☆ </label>
+		<div id="imgp">
+			<p>- 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.</p>
+			<p>- 확대하기를 누를 경우 원본이미지를 확인할 수 있습니다.</p>
+			<p>- 사진을 클릭 후 이동하여 등록순서를 변경할 수 있습니다.</p>
+			<p>- 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.</p>
+			<p>최대 지원 사이즈인 640x640으로 리사이즈 해서 올려주세요.</p>
+			<p>(개당 이미지 최대 10M)</p>
+		</div>
+		<div>
+			<h3>이미지 미리보기</h3>
+			<p class="title">이미지 업로드</p>
+			<input type="file" id="input_imgs" multiple />
+		</div>
+		<div>
+			<div class="imgs_wrap">
+				
+			</div>
+		</div>
+	</div>
+		<table style="background-color: rgb(255, 241, 242); height: 80%">
+			<tr id="Review_Text" valign="top">
+				<td></td>
+				<td>&nbsp; 후기 TEXT &nbsp;<textarea name="editor2"></textarea>&nbsp; <script>
+					CKEDITOR.replace('editor2');
+				</script></td>
+			</tr>
+			<tr id="Review_Trust">
+				<td></td>
+				<td class="trust">&nbsp; 신뢰도 &nbsp; : &nbsp;<input type="radio" name="trust" value="Plus"
+					style="width: 20px; height: 20px;"> + &nbsp; / &nbsp;<input
+					type="radio" name="trust" value="Minus"
+					style="width: 20px; height: 20px;"> ─</td>
+			</tr>
+		</table>
+		<button id="end" type="button">작성 완료</button>
+	</div>
+</body>
+</html>

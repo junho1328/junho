@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="statisticsMapper">
+	<!-- Table 유무 검사 -->
+	<select id="selectTable" resultType="int">
+		select count(*) from statistics 
+		where statistics_date=(select To_CHAR(sysdate,'yyyy-MM-dd') from dual)
+	</select>
+	<!-- 오늘 날짜분 생성 -->
+	<insert id="insertTable">
+		insert into statistics (statistics_date,deal_amount,deal_count,join_count,visit_count)
+		values((select To_CHAR(sysdate,'yyyy-MM-dd') from dual),0,0,0,0)
+	</insert>
+	<!-- 방문자 수 증가 -->
+	<update id="addVisit">
+		update statistics set visit_count=visit_count+1 
+		where statistics_date=(select To_CHAR(sysdate,'yyyy-MM-dd') from dual)
+	</update>
+	<!-- 회원가입 수 증가 -->
+	<update id="addJoin">
+		update statistics set join_count=join_count+1 
+		where statistics_date=(select To_CHAR(sysdate,'yyyy-MM-dd') from dual)
+	</update>
+	<!-- 거래횟수 증가 -->
+	<update id="addDealCount">
+		update statistics set deal_count=deal_count+1 
+		where statistics_date=(select To_CHAR(sysdate,'yyyy-MM-dd') from dual)
+	</update>
+	<!-- 매출액 증가 -->
+	<update id="addDealAmount">
+		update statistics set deal_amount=deal_amount+#{amount} 
+		where statistics_date=(select To_CHAR(sysdate,'yyyy-MM-dd') from dual)
+	</update>
+	<!-- 오늘자 통계 조회 -->
+	<select id="findAllByToday" resultType="statistics">
+		select statistics_date+10/24 statisticsDate,deal_amount dealAmount,deal_count dealCount,join_count joinCount,visit_count visitCount
+		from statistics
+		where statistics_date=(select To_CHAR(sysdate,'yyyy-MM-dd') from dual)
+	</select>
+	<!-- 전체 통계 조회 -->
+	<select id="findAll" resultType="statistics">
+		select statistics_date+10/24 statisticsDate,deal_amount dealAmount,deal_count dealCount,join_count joinCount,visit_count visitCount
+		from statistics
+	</select>
+	<!-- 항목별 월별 데이터 조회 -->
+	<select id="findDealAmountByMonth" resultType="string">
+	<![CDATA[
+		select SUM(deal_amount) from statistics
+		where statistics_date<=#{endDay} and statistics_date>=#{startDay}
+		]]>
+	</select>
+	<select id="findDealCountByMonth" resultType="string">
+	<![CDATA[
+		select SUM(deal_count) from statistics
+		where statistics_date<=#{endDay} and statistics_date>=#{startDay}
+		]]>
+	</select>
+	<select id="findJoinCountByMonth" resultType="string">
+	<![CDATA[
+		select SUM(join_count) from statistics
+		where statistics_date<=#{endDay} and statistics_date>=#{startDay}
+		]]>
+	</select>
+	<select id="findVisitCountByMonth" resultType="string">
+	<![CDATA[
+		select SUM(visit_count) from statistics
+		where statistics_date<=#{endDay} and statistics_date>=#{startDay}
+		]]>
+	</select>
+</mapper>

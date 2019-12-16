@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productMapper">
+	<insert id="insert">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select product_seq.nextval from dual <!--  하나씩 올라 가는 값 -->
+		</selectKey>
+		insert into product(no, lno, sno, name, price,image, quantity, state, product_date)
+		values(#{no},#{lno},#{sno},#{name},#{price},#{image},#{quantity},0, sysdate)
+	</insert>
+	<select id="findAllProduct" resultType="product">
+		select no, category_no, name, price, image, quantity, state from product
+	</select>
+	<select id="findProduct" resultType="product">
+		select no, lno, sno, name, price, image, quantity, state from product
+		where no=#{no}
+	</select>
+	<delete id="delete">
+		delete from no where no=#{no}
+	</delete> 
+</mapper>

@@ -1,0 +1,19 @@
+package com.icia.fontExample.Service;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.Dao.*;
+
+@Service
+public class WithdrawalService {
+	@Autowired
+	private WithdrawalDao dao;
+	
+	public int withdrawal(String username, String retire_reason, String reason_detail) {
+		dao.insert(reason_detail);
+		dao.update(retire_reason);
+		return dao.delete(username);
+	}
+
+}

@@ -1,0 +1,32 @@
+package com.icia.fontExample.Dao;
+
+import java.util.*;
+
+import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.icia.fontExample.entity.*;
+
+@Repository
+public class InquiryDao {
+
+	@Autowired
+	private SqlSessionTemplate tpl;
+	
+	public int insert(Inquiry inquiry)	{
+		return tpl.insert("inquiryMapper.insert",inquiry);
+	}
+	public Inquiry inquiryRead(Long no) {
+		return tpl.selectOne("inquiryMapper.inquiryByNo", no);
+	}
+	public List<Inquiry> findAll(){
+		return tpl.selectList("inquiryMapper.findAll");
+	}
+
+	public int delete(long no){
+		return tpl.delete("inquiryMapper.delete",no);
+	}
+	
+}
+
